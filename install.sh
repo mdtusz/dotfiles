@@ -2,7 +2,7 @@
 
 ###########################
 # This script installs the dotfiles and runs all other system configuration scripts
-# @author Adam Eivy
+# Inspired/forked from Adam Eivy
 ###########################
 
 
@@ -14,7 +14,7 @@ if [[ ! -e ~/.dotfiles_backup ]]; then
     mkdir ~/.dotfiles_backup
 fi
 
-bot "Hi. I'm going to make your OSX system better. But first, I need to configure this project based on your info so you don't check in files to github as Adam Eivy from here on out :)"
+bot "Hi. I'm going to make your OSX system the way it should be :)"
 
 fullname=`osascript -e "long user name of (system info)"`
 me=`dscl . -read /Users/$(whoami)`
@@ -55,20 +55,20 @@ running "replacing items in .gitconfig with your info ($COL_YELLOW$fullname, $em
 
 # test if gnu-sed or osx sed
 
-sed -i 's/Adam Eivy/'$firstname' '$lastname'/' .gitconfig > /dev/null 2>&1 | true
+sed -i 's/Miklós Tuz/'$firstname' '$lastname'/' .gitconfig > /dev/null 2>&1 | true
 if [[ ${PIPESTATUS[0]} != 0 ]]; then
   echo
   running "looks like you are using OSX sed rather than gnu-sed, accommodating"
-  sed -i '' 's/Adam Eivy/'$firstname' '$lastname'/' .gitconfig;
-  sed -i '' 's/adam.eivy@disney.com/'$email'/' .gitconfig;
-  sed -i '' 's/atomantic/'$githubuser'/' .gitconfig;
-  sed -i '' 's/antic/'$(whoami)'/g' .zshrc;ok
+  sed -i '' 's/Miklós Tusz/'$firstname' '$lastname'/' .gitconfig;
+  sed -i '' 's/mdtusz@gmail.com/'$email'/' .gitconfig;
+  sed -i '' 's/mdtusz/'$githubuser'/' .gitconfig;
+  sed -i '' 's/miklos/'$(whoami)'/g' .zshrc;ok
 else
   echo
   bot "looks like you are already using gnu-sed. woot!"
-  sed -i 's/adam.eivy@disney.com/'$email'/' .gitconfig;
-  sed -i 's/atomantic/'$githubuser'/' .gitconfig;
-  sed -i 's/antic/'$(whoami)'/g' .zshrc;ok
+  sed -i 's/mdtusz@gmail.com/'$email'/' .gitconfig;
+  sed -i 's/mdtusz/'$githubuser'/' .gitconfig;
+  sed -i 's/miklos/'$(whoami)'/g' .zshrc;ok
 fi
 
 # read -r -p "OK? [Y/n] " response
@@ -112,21 +112,13 @@ function symlinkifne {
 bot "creating symlinks for project dotfiles..."
 
 symlinkifne .crontab
-symlinkifne .gemrc
 symlinkifne .gitconfig
 symlinkifne .gitignore
 symlinkifne .profile
-symlinkifne .rvmrc
-symlinkifne .screenrc
 symlinkifne .shellaliases
 symlinkifne .shellfn
-symlinkifne .shellpaths
 symlinkifne .shellvars
-symlinkifne .vim
-symlinkifne .vimrc
-symlinkifne .zlogout
-symlinkifne .zprofile
-symlinkifne .zshenv
+symlinkifne .shellpaths
 symlinkifne .zshrc
 
 popd > /dev/null 2>&1

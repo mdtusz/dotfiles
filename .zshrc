@@ -1,53 +1,80 @@
-# Path to your oh-my-zsh configuration.
-export ZSH=$HOME/.dotfiles/oh-my-zsh
-
-# Set name of the theme to load.
-# Look in $ZSH/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-export ZSH_THEME="pygmalion"
-#export ZSH_THEME="random"
-
 # Set to this to use case-sensitive completion
-export CASE_SENSITIVE="true"
+export CASE_SENSITIVE="false"
 
-# Comment this out to disable weekly auto-update checks
-# export DISABLE_AUTO_UPDATE="true"
+autoload -U compinit promptinit zsh-mime-setup colors
+colors
+compinit
+promptinit
+zsh-mime-setup
 
-# Uncomment following line if you want to disable colors in ls
-# export DISABLE_LS_COLORS="true"
+# Options
+setopt AUTO_CD
+setopt MULTIOS
+setopt CORRECT
+setopt AUTO_NAME_DIRS
+setopt GLOB_COMPLETE
+setopt PUSHD_MINUS
+setopt NO_HUP
 
-# Uncomment following line if you want to disable autosetting terminal title.
-# export DISABLE_AUTO_TITLE="true"
+export EDITOR="subl -w"
+export PATH=$PATH:/usr/local/bin:/usr/bin
+export LANG=en_US
 
-# Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew github osx rvm compleat dirpersist gem git-flow ssh-agent cloudapp colorize)
+# History
+HISTFILE=~/.history
+SAVEHIST=10000
+HISTSIZE=10000
+setopt APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_SPACE
+setopt HIST_NO_STORE
+setopt HIST_VERIFY
+setopt EXTENDED_HISTORY
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
 
-source $ZSH/oh-my-zsh.sh
+host_color=cyan
+history_color=yellow
+user_color=green
+root_color=red
+directory_color=magenta
+error_color=red
+jobs_color=green
 
-source ~/.nvm/nvm.sh
+host_prompt="%{$fg_bold[$host_color]%}%m%{$reset_color%}"
+jobs_prompt1="%{$fg_bold[$jobs_color]%}(%{$reset_color%}"
+jobs_prompt2="%{$fg[$jobs_color]%}%j%{$reset_color%}"
+jobs_prompt3="%{$fg_bold[$jobs_color]%})%{$reset_color%}"
+jobs_total="%(1j.${jobs_prompt1}${jobs_prompt2}${jobs_prompt3} .)"
+history_prompt1="%{$fg_bold[$history_color]%}[%{$reset_color%}"
+history_prompt2="%{$fg[$history_color]%}%h%{$reset_color%}"
+history_prompt3="%{$fg_bold[$history_color]%}]%{$reset_color%}"
+history_total="${history_prompt1}${history_prompt2}${history_prompt3}"
+error_prompt1="%{$fg_bold[$error_color]%}<%{$reset_color%}"
+error_prompt2="%{$fg[$error_color]%}%?%{$reset_color%}"
+error_prompt3="%{$fg_bold[$error_color]%}>%{$reset_color%}"
+error_total="%(?..${error_prompt1}${error_prompt2}${error_prompt3} )"
 
-# Customize to your needs...
-unsetopt correct
+case "$TERM" in
+  (screen)
+    function precmd() { print -Pn "\033]0;S $TTY:t{%100<...<%~%<<}\007" }
+  ;;
+  (xterm)
+    directory_prompt=""
+  ;;
+  (*)
+    directory_prompt="%{$fg[$directory_color]%}%~%{$reset_color%} "
+  ;;
+esac
 
-export PATH="/Users/antic/.rbenv/shims:${PATH}"
-source "/usr/local/Cellar/rbenv/0.4.0/libexec/../completions/rbenv.zsh"
-rbenv rehash 2>/dev/null
-rbenv() {
-  typeset command
-  command="$1"
-  if [ "$#" -gt 0 ]; then
-    shift
-  fi
+if [[ $USER == root ]]; then
+    post_prompt="%{$fg_bold[$root_color]%}%#%{$reset_color%}"
+else
+    post_prompt="%{$fg_bold[$user_color]%}%#%{$reset_color%}"
+fi
 
-  case "$command" in
-  rehash|shell)
-    eval `rbenv "sh-$command" "$@"`;;
-  *)
-    command rbenv "$command" "$@";;
-  esac
-}
-
-# run fortune on new terminal :)
-fortune
+PS1="${host_prompt} ${jobs_total}${history_total} ${directory_prompt}${error_total}${post_prompt} "

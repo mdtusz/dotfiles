@@ -87,32 +87,3 @@ function require_npm() {
     fi
     ok
 }
-
-
-function require_vagrant_plugin() {
-    running "vagrant plugin $1"
-    local vagrant_plugin=$1
-    local vagrant_plugin_version=$2
-    local grepExpect=$vagrant_plugin
-    local grepStatus=$(vagrant plugin list | grep $vagrant_plugin)
-
-    if [[ ! -z $vagrant_plugin_version ]]; then
-        grepExpect=$grepExpect' ('$vagrant_plugin_version')'
-    else
-        # we are only looking for the name
-        grepStatus=${grepStatus%% *}
-    fi
-
-    #echo 'checking if '$grepExpect' is installed via grepStatus: '$grepStatus
-
-    if [[ $grepStatus != $grepExpect ]];
-        then
-            action "installing vagrant plugin $1 $2"
-            if [[ ! -z $vagrant_plugin_version ]]; then
-                vagrant plugin install $vagrant_plugin --plugin-version $vagrant_plugin_version
-            else
-                vagrant plugin install $vagrant_plugin
-            fi
-    fi
-    ok
-}
