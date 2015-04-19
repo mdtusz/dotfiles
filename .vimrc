@@ -1,14 +1,5 @@
-
-set nocompatible " get out of horrible vi-compatible mode
-if has('gui_running')
-    set background=light
-else
-    set background=dark
-endif
-colorscheme solarized
-syntax on " syntax highlighting on
+set nocompatible
 filetype off
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle
@@ -18,12 +9,13 @@ call vundle#begin()
 
 " Vundle packages
 Plugin 'gmarik/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/syntastic'
 
 call vundle#end()
+" Vundle end
+
 filetype plugin indent on
-" End of Vundle setup
+syntax on " syntax highlighting on
 
 " Syntastic settings
 set statusline+=%#warningmsg#
@@ -43,14 +35,10 @@ let g:syntastic_check_on_wq = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax enable
-set background=dark
-colorscheme solarized
 
 set history=1000 " How many lines of history to remember
 set number
 set ruler
-set colorcolumn=80
 set showcmd
 set cursorline
 filetype indent on
@@ -107,19 +95,6 @@ set shiftwidth=2
 set autoindent
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Folding
-"    Enable folding, but by default make it act like folding is
-"    off, because folding is annoying in anything but a few rare
-"    cases
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set foldenable " Turn on folding
-set foldmarker={,} " Fold C style code
-set foldmethod=marker " Fold on the marker
-set foldlevel=100 " Don't autofold anything (but I can still fold manually)
-set foldopen-=search " don't open folds when you search into them
-set foldopen-=undo " don't open folds when you undo stuff
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <up> <nop>
@@ -137,9 +112,6 @@ vnoremap <right> <nop>
 
 nnoremap j gj
 nnoremap k gk
-
-" Leader
-let mapleader="\<Space>"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching

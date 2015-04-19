@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-###
-# some bash library helpers
-# @author Adam Eivy
-###
-
 # Colors
 ESC_SEQ="\x1b["
 COL_RESET=$ESC_SEQ"39;49;00m"
@@ -41,9 +36,9 @@ function error() {
 
 function require_cask() {
     running "brew cask $1"
-    brew cask list $1 > /dev/null 2>&1 | true
-    if [[ ${PIPESTATUS[0]} != 0 ]]; then
-        action "brew cask install $1 $2"
+    brew cask list $1 > /dev/null 2>&1
+    if [[ $? != 0 ]]; then
+        action "brew cask install $1"
         brew cask install $1
         if [[ $? != 0 ]]; then
             error "failed to install $1! aborting..."
@@ -54,11 +49,11 @@ function require_cask() {
 }
 
 function require_brew() {
-    running "brew $1 $2"
-    brew list $1 > /dev/null 2>&1 | true
-    if [[ ${PIPESTATUS[0]} != 0 ]]; then
-        action "brew install $1 $2"
-        brew install $1 $2
+    running "brew $1"
+    brew list $1 > /dev/null 2>&1
+    if [[ $? != 0 ]]; then
+        action "brew install $1"
+        brew install $1
         if [[ $? != 0 ]]; then
             error "failed to install $1! aborting..."
             exit -1
@@ -69,21 +64,41 @@ function require_brew() {
 
 function require_gem() {
     running "gem $1"
-    if [[ $(gem list --local | grep $1 | head -1 | cut -d' ' -f1) != $1 ]];
-        then
-            action "gem install $1"
-            gem install $1
+    if [[ $(gem list --local | grep $1 | head -1 | cut -d' ' -f1) != $1 ]]; then
+        action "gem install $1"
+        gem install $1
+        if [[ $? != 0 ]]; then
+            error "failed to install $1! aborting..."
+            exit -1
+        fi
     fi
     ok
 }
 
-npmlist=`npm list -g`
 function require_npm() {
     running "npm $1"
-    echo $npmlist | grep $1@ > /dev/null
+    npm list -g | grep $1 > /dev/null
     if [[ $? != 0 ]]; then
         action "npm install -g $1"
         npm install -g $1
+        if [[ $? != 0 ]]; then
+            error "failed to install $1! aborting..."
+            exit -1
+        fi
+    fi
+    ok
+}
+
+function require_pip() {
+    running "pip $1"
+    pip show $1
+    if [[ $? != 0 ]]; then
+        action "pip install $1"
+        sudo pip install $1
+        if [[ $? != 0 ]]; then
+            error "failed to install $1! aborting..."
+            exit -1
+        fi
     fi
     ok
 }

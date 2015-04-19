@@ -1,10 +1,12 @@
-#!/usr/bin/env bash
-
 # include my library helpers for colorized echo and require_brew, etc
 source ./lib.sh
 
+# Ask for computer name
+bot "Time to set up OSX!"
+read -r -p  "What do you want to name this machine? " machinename
+
 # Ask for the administrator password upfront
-bot "I need you to enter your sudo password so I can install some things:"
+bot "I need you to enter your sudo password so I can install some things: "
 sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
@@ -12,15 +14,15 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 bot "OK, let's roll..."
 
-#####
+##################################################################
 # install homebrew
-#####
+##################################################################
 
 running "checking homebrew install"
 brew_bin=$(which brew) 2>&1 > /dev/null
 if [[ $? != 0 ]]; then
 	action "installing homebrew"
-    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     if [[ $? != 0 ]]; then
     	error "unable to install homebrew, script $0 abort!"
     	exit -1
@@ -36,8 +38,19 @@ if [[ $? != 0 ]]; then
 fi
 ok
 
+running "checking pip install"
+output=$(which pip) 2>&1 > /dev/null
+if [[ $? != 0 ]]; then
+	action "installing pip"
+	sudo easy_install pip
+	if [[ $? != 0 ]]; then
+		error "unable to install pip"
+	fi
+fi
+ok
+
 ###############################################################################
-#Install command-line tools using Homebrew                                    #
+# Install command-line tools using Homebrew                                   #
 ###############################################################################
 # Make sure we’re using the latest Homebrew
 running "updating homebrew"
@@ -57,19 +70,12 @@ fi
 
 bot "installing homebrew command-line tools"
 
-# docker setup:
-require_brew docker
-
-# skip those GUI clients, git command-line all the way
+# Tasty brews
 require_brew git
-# better, more recent grep
 require_brew homebrew/dupes/grep
-# http://maven.apache.org/
 require_brew node
+require_brew docker
 require_brew redis
-require_brew erlang
-require_brew couchdb
-# better, more recent vim
 require_brew vim --override-system-vi
 
 ###############################################################################
@@ -84,19 +90,38 @@ require_cask dropbox
 # communication
 require_cask slack
 require_cask limechat
+require_cask skype
 
 # tools
 require_cask github
 require_cask iterm2
-require_cask sublime-text
+require_cask sublime-text3
 require_cask the-unarchiver
 require_cask transmission
 require_cask vlc
 require_cask alfred
-require_cask bettertouchtool
 require_cask processing
+require_cask 1password
 
-# development browsers
+# docker
+curl -L https://github.com/docker/machine/releases/download/v0.2.0/docker-machine_darwin-amd64 > /usr/local/bin/docker-machine
+chmod +x /usr/local/bin/docker-machine
+
+# tunes
+require_cask spotify
+
+# Mjolnir stuff
+require_cask mjolnir
+require_brew lua
+require_brew luarocks
+mkdir -p ~/.luarocks
+echo 'rocks_servers = { "http://rocks.moonscript.org" }' > ~/.luarocks/config.lua
+luarocks install mjolnir.hotkey
+luarocks install mjolnir.application
+luarocks install mjolnir.tiling
+luarocks install mjolnir.th.hints
+
+# browsers
 require_cask firefox
 require_cask google-chrome
 require_cask google-chrome-canary
@@ -139,10 +164,10 @@ sudo chflags uchg /Private/var/vm/sleepimage;ok
 ################################################
 
 # running "Set computer name (as done via System Preferences → Sharing)"
-sudo scutil --set ComputerName "delta"
-sudo scutil --set HostName "delta"
-sudo scutil --set LocalHostName "delta"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "delta"
+sudo scutil --set ComputerName $machinename
+sudo scutil --set HostName $machinename
+sudo scutil --set LocalHostName $machinename
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $machinename
 
 # running "Stop iTunes from responding to the keyboard media keys and delete it"
 launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null;ok
@@ -180,8 +205,8 @@ sudo nvram boot-args="-v";ok
 # running "allow 'locate' command"
 # sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist > /dev/null 2>&1;ok
 
-running "Set standby delay to 24 hours (default is 1 hour)"
-sudo pmset -a standbydelay 86400;ok
+running "Set standby delay to 2 hours (default is 1 hour)"
+sudo pmset -a standbydelay 7200;ok
 
 running "Disable the sound effects on boot"
 sudo nvram SystemAudioVolume=" ";ok
@@ -192,8 +217,8 @@ defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false;ok
 # running "Set highlight color to green"
 # defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600";ok
 
-running "Set sidebar icon size to medium"
-defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2;ok
+running "Set sidebar icon size to small"
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1;ok
 
 running "Show scrollbars when scrolling"
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling";ok
@@ -310,8 +335,8 @@ running "Require password immediately after sleep or screen saver begins"
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0;ok
 
-running "Save screenshots to the desktop"
-defaults write com.apple.screencapture location -string "${HOME}/Desktop";ok
+running "Save screenshots to better location"
+defaults write com.apple.screencapture location ${HOME}/Pictures/Screenshots/;ok
 
 running "Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)"
 defaults write com.apple.screencapture type -string "png";ok
@@ -325,6 +350,8 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 2;ok
 running "Enable HiDPI display modes (requires restart)"
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true;ok
 
+killall SystemUIServer
+
 ###############################################################################
 bot "Finder Configs"
 ###############################################################################
@@ -335,10 +362,10 @@ defaults write com.apple.finder QuitMenuItem -bool true;ok
 running "Disable window animations and Get Info animations"
 defaults write com.apple.finder DisableAllAnimations -bool true;ok
 
-running "Set Desktop as the default location for new Finder windows"
+running "Set Home as the default location for new Finder windows"
 # For other paths, use `PfLo` and `file:///full/path/here/`
-defaults write com.apple.finder NewWindowTarget -string "PfDe"
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/";ok
+defaults write com.apple.finder NewWindowTarget -string "PfLo"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/";ok
 
 # running "Show hidden files by default"
 # defaults write com.apple.finder AppleShowAllFiles -bool true;ok
@@ -355,8 +382,8 @@ defaults write com.apple.finder ShowPathbar -bool true;ok
 running "Allow text selection in Quick Look"
 defaults write com.apple.finder QLEnableTextSelection -bool true;ok
 
-# running "Display full POSIX path as Finder window title"
-# defaults write com.apple.finder _FXShowPosixPathInTitle -bool true;ok
+running "Display full POSIX path as Finder window title"
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true;ok
 
 running "When performing a search, search the current folder by default"
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf";ok
@@ -399,7 +426,6 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true;ok
 running "Show the ~/Library folder"
 chflags nohidden ~/Library;ok
 
-
 running "Expand the following File Info panes: “General”, “Open with”, and “Sharing & Permissions”"
 defaults write com.apple.finder FXInfoPanesExpanded -dict \
 	General -bool true \
@@ -414,7 +440,7 @@ running "Enable highlight hover effect for the grid view of a stack (Dock)"
 defaults write com.apple.dock mouse-over-hilite-stack -bool true;ok
 
 running "Set the icon size of Dock items to 36 pixels"
-defaults write com.apple.dock tilesize -int 36;ok
+defaults write com.apple.dock tilesize -int 34;ok
 
 running "Change minimize/maximize window effect to scale"
 defaults write com.apple.dock mineffect -string "scale";ok
@@ -498,23 +524,8 @@ bot "Terminal & iTerm2"
 running "Only use UTF-8 in Terminal.app"
 defaults write com.apple.terminal StringEncodings -array 4;ok
 
-running "Use a modified version of the Solarized Dark theme by default in Terminal.app"
-TERM_PROFILE='Solarized Dark xterm-256color';
-CURRENT_PROFILE="$(defaults read com.apple.terminal 'Default Window Settings')";
-if [ "${CURRENT_PROFILE}" != "${TERM_PROFILE}" ]; then
-	open "./configs/${TERM_PROFILE}.terminal";
-	sleep 1; # Wait a bit to make sure the theme is loaded
-	defaults write com.apple.terminal 'Default Window Settings' -string "${TERM_PROFILE}";
-	defaults write com.apple.terminal 'Startup Window Settings' -string "${TERM_PROFILE}";
-fi;
-
-#running "Enable “focus follows mouse” for Terminal.app and all X11 apps"
-# i.e. hover over a window and start typing in it without clicking first
-#defaults write com.apple.terminal FocusFollowsMouse -bool true
-#defaults write org.x.X11 wm_ffm -bool true;ok
-
 running "Installing the Solarized Dark theme for iTerm (opening file)"
-open "./configs/Solarized Dark.itermcolors";ok
+open "~/.dotfiles/.configs/Solarized Dark.itermcolors";ok
 
 running "Don’t display the annoying prompt when quitting iTerm"
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false;ok
@@ -565,8 +576,13 @@ defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://
 bot "Sublime Text"
 ###############################################################################
 
-running "Install Sublime Text settings"
-cp -r configs/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null;ok
+running "Install Sublime Text Package Control"
+curl https://packagecontrol.io/Package%20Control.sublime-package > ~/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package;ok
+running "Install Packages"
+ln -f configs/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Preferences.sublime-settings;ok
+running "Install Sublime Text Settings"
+ln -f configs/Package\ Control.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Package\ Control.sublime-settings;ok
+
 
 ###############################################################################
 bot "NPM Globals..."
@@ -579,13 +595,19 @@ require_npm gulp
 require_npm jshint
 require_npm blastoff
 require_npm nodemon
-require_npm sass
+require_npm jshint
+require_npm node-sass
 
 ###############################################################################
-bot "Ruby Gems..."
+# bot "Ruby Gems..."
 ###############################################################################
-require_gem git-up
+# require_gem sass
 
+###############################################################################
+bot "Pip Packages..."
+##############################################################################
+require_pip awscli
+require_pip awsebcli
 
 ###############################################################################
 # Kill affected applications                                                  #
@@ -593,6 +615,6 @@ require_gem git-up
 bot "OK. Note that some of these changes require a logout/restart to take effect. Killing affected applications (so they can reboot)...."
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 	"Dock" "Finder" "Mail" "Messages" "Safari" "SizeUp" "SystemUIServer" \
-	"iCal" "Terminal"; do
+	"iCal";do
 	killall "${app}" > /dev/null 2>&1
 done

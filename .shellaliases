@@ -1,11 +1,7 @@
-#!/bin/sh
-
-#########################################
-# Connectivity
-#alias ssh.host ='ssh user@host.net'
-
 #########################################
 # Commands to run apps
+alias sub='subl -s'
+alias unarch='~/Applications/The\ Unarchiver.app/Contents/MacOS/The\ Unarchiver'
 
 #########################################
 # Commands to change dirs
@@ -18,12 +14,11 @@ alias to.scratch='cd ${MYSCRATCH}'
 alias to.devapps='cd ${MYDEVAPPS}'
 alias to.desktop='cd ${MYDESKTOP}'
 
-
 #################################
 # Docker
 alias dm=docker-machine
 alias dicker=docker
-alias dpsa = docker ps -a
+alias dpsa='docker ps -a'
 
 #############################
 # Utilities
