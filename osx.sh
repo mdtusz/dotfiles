@@ -75,7 +75,7 @@ require_brew git
 require_brew homebrew/dupes/grep
 require_brew node
 require_brew docker
-require_brew redis
+require_brew docker-machine
 require_brew vim --override-system-vi
 
 ###############################################################################
@@ -102,24 +102,15 @@ require_cask vlc
 require_cask alfred
 require_cask processing
 require_cask 1password
+require_cask bettertouchtool
+require_cask calibre
 
 # docker
-curl -L https://github.com/docker/machine/releases/download/v0.2.0/docker-machine_darwin-amd64 > /usr/local/bin/docker-machine
-chmod +x /usr/local/bin/docker-machine
+# curl -L https://github.com/docker/machine/releases/download/v0.2.0/docker-machine_darwin-amd64 > /usr/local/bin/docker-machine
+# chmod +x /usr/local/bin/docker-machine
 
 # tunes
 require_cask spotify
-
-# Mjolnir stuff
-require_cask mjolnir
-require_brew lua
-require_brew luarocks
-mkdir -p ~/.luarocks
-echo 'rocks_servers = { "http://rocks.moonscript.org" }' > ~/.luarocks/config.lua
-luarocks install mjolnir.hotkey
-luarocks install mjolnir.application
-luarocks install mjolnir.tiling
-luarocks install mjolnir.th.hints
 
 # browsers
 require_cask firefox
@@ -146,8 +137,9 @@ bot "Configuring General System UI/UX..."
 running "Disable local Time Machine snapshots"
 sudo tmutil disablelocal;ok
 
+# Might not be a good idea... we'll see
 running "Disable hibernation (speeds up entering sleep mode)"
-sudo pmset -a hibernatemode 0;ok
+sudo pmset -a hibernatemode 1;ok
 
 running "Remove the sleep image file to save disk space"
 sudo rm -rf /Private/var/vm/sleepimage;ok

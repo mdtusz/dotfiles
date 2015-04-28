@@ -61,7 +61,6 @@ symlinkifne .shellpaths
 symlinkifne .profile
 symlinkifne .zshrc
 symlinkifne .vimrc
-symlinkifne .mjolnir
 
 popd > /dev/null 2>&1
 

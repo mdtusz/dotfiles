@@ -33,3 +33,5 @@ setopt HIST_SAVE_NO_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
 
+# LaTeX things
+eval `/usr/libexec/path_helper -s`

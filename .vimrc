@@ -76,6 +76,8 @@ set softtabstop=2 " unify
 set shiftwidth=2 " unify
 set tabstop=2 " real tabs should be 4, but they will show with set list on
 set copyindent " but above all -- follow the conventions laid before us
+set wrap
+set textwidth=80
 filetype plugin indent on " load filetype plugins and indent settings
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -88,7 +90,6 @@ set preserveindent " but above all -- follow the conventions laid before us
 set ignorecase " case insensitive by default
 set smartcase " if there are caps, go case-sensitive
 set completeopt=menu,longest,preview " improve the way autocomplete works
-set cursorcolumn " show the current column
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
