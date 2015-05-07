@@ -139,7 +139,7 @@ sudo tmutil disablelocal;ok
 
 # Might not be a good idea... we'll see
 running "Disable hibernation (speeds up entering sleep mode)"
-sudo pmset -a hibernatemode 1;ok
+sudo pmset -a hibernatemode 0;ok
 
 running "Remove the sleep image file to save disk space"
 sudo rm -rf /Private/var/vm/sleepimage;ok
