@@ -2,6 +2,7 @@
 # Commands to run apps
 alias sub='subl -s'
 alias unarch='~/Applications/The\ Unarchiver.app/Contents/MacOS/The\ Unarchiver'
+alias pms='python -m SimpleHTTPServer'
 
 #########################################
 # Commands to change dirs
@@ -19,6 +20,11 @@ alias to.desktop='cd ${MYDESKTOP}'
 alias dm=docker-machine
 alias dicker=docker
 alias dpsa='docker ps -a'
+
+# Rust
+alias cr='cargo run'
+alias cb='cargo build'
+alias ct='cargo test'
 
 #############################
 # Utilities
