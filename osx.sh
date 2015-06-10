@@ -73,7 +73,7 @@ bot "installing homebrew command-line tools"
 # Tasty brews
 require_brew git
 require_brew homebrew/dupes/grep
-require_brew node
+require_brew nvm
 require_brew docker
 require_brew docker-machine
 require_brew vim --override-system-vi

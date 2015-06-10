@@ -2,5 +2,7 @@
 export PATH=/usr/local/bin:$PATH:
 export PATH=/usr/local/sbin:$PATH:
 
-# NPM
-export PATH=/usr/local/share/npm/bin:$PATH:
+# NVM
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+

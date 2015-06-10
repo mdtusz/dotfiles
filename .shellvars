@@ -4,8 +4,8 @@
 # Temporary aliases useful for demos, other current projects
 #########################################################################
 export MYTEMP=~/Documents/Temp
-export MYCODE=~/Documents/Code
-export MYSCRATCH=~/Documents/Temp/Scratch
+export MYCODE=~/Code
+export MYSCRATCH=~/Scratch
 export MYDOWNLOADS=~/Downloads
 export MYDOCUMENTS=~/Documents
 export MYDESKTOP=~/Desktop

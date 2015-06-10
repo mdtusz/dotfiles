@@ -20,6 +20,7 @@ alias to.desktop='cd ${MYDESKTOP}'
 alias dm=docker-machine
 alias dicker=docker
 alias dpsa='docker ps -a'
+alias dc=docker-compose
 
 # Rust
 alias cr='cargo run'
