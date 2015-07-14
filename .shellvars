@@ -3,10 +3,6 @@
 #########################################################################
 # Temporary aliases useful for demos, other current projects
 #########################################################################
-export MYTEMP=~/Documents/Temp
-export MYCODE=~/Code
-export MYSCRATCH=~/Scratch
 export MYDOWNLOADS=~/Downloads
 export MYDOCUMENTS=~/Documents
-export MYDESKTOP=~/Desktop
-export MYDEVAPPS=/Applications/Dev
+export SANDBOX=~/Code/Sandbox

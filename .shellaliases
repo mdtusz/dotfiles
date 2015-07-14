@@ -6,22 +6,19 @@ alias pms='python -m SimpleHTTPServer'
 
 #########################################
 # Commands to change dirs
-alias to.temp='cd ${MYTEMP}'
 alias to.downloads='cd ${MYDOWNLOADS}'
 alias to.dropbox='cd ~/Dropbox'
 alias to.docs='cd ${MYDOCUMENTS}'
-alias to.code='cd ${MYCODE}'
-alias to.scratch='cd ${MYSCRATCH}'
-alias to.devapps='cd ${MYDEVAPPS}'
-alias to.desktop='cd ${MYDESKTOP}'
+alias to.sandbox='cd ${SANDBOX}'
 
-#################################
+#########################################
 # Docker
 alias dm=docker-machine
 alias dicker=docker
 alias dpsa='docker ps -a'
 alias dc=docker-compose
 
+#########################################
 # Rust
 alias cr='cargo run'
 alias cb='cargo build'
@@ -30,20 +27,10 @@ alias ct='cargo test'
 #############################
 # Utilities
 
-# Flush the DNS on Mac
-alias dnsflush='dscacheutil -flushcache'
-
 # Directory listings
-# LS_COLORS='no=01;37:fi=01;37:di=07;96:ln=01;36:pi=01;32:so=01;35:do=01;35:bd=01;33:cd=01;33:ex=01;31:mi=00;05;37:or=00;05;37:'
-# -G Add colors to ls
-# -l Long format
-# -h Short size suffixes (B, K, M, G, P)
-# -p Postpend slash to folders
 alias ls='ls -G -h -p '
 alias ll='ls -l -G -h -p '
 
+# Navigation
 alias ..='cd ..'
 alias ...='cd .. && cd ..'
-
-# Restart Apache on Mac
-alias apacherestart="sudo /usr/sbin/apachectl restart"

@@ -7,13 +7,20 @@
 		"AdvancedNewFile",
 		"BracketHighlighter",
 		"ColorPicker",
-		"Emmet Css Snippets",
+		"ECT",
+		"Elm Language Support",
+		"Emmet",
+		"JavaScriptNext - ES6 Syntax",
 		"JsFormat",
+		"LaTeXTools",
 		"Package Control",
 		"SCSS",
 		"SideBarEnhancements",
+		"SublimeHaskell",
 		"SublimeLinter",
 		"SublimeLinter-jshint",
+		"SublimeLinter-jsxhint",
+		"Swig",
 		"Theme - amCoder"
 	]
 }

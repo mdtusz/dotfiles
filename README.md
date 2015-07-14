@@ -1,14 +1,13 @@
-# \\[._.]/ - Hi, I'm the OSX bot
-
-Forked from [Adam Eivy's](https://github.com/atomantic/dotfiles) dotbot dotfile tool. It's set up to my own preferences, so use with caution.
+# Dotfiles 2.0
 
 ## Now Featuring...
 
-* Mjolnir, an awesome window manager for mac
+* Brew and Casks
 * Oh-my-zsh
 * Vundle for vim
+* Sublime Text setup
 * Lots of cool osx preference tweaks
 * Automagic installation of all the tools and programs I need
-* A cute little robot
+* A cute little catbot
 
 Always a work in progress.

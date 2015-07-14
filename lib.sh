@@ -15,7 +15,7 @@ function ok() {
 }
 
 function bot() {
-    echo -e "\n$COL_GREEN\[._.]/$COL_RESET - "$1
+    echo -e "\n$COL_GREEN(^ㅇㅅㅇ^)$COL_RESET - "$1
 }
 
 function running() {
@@ -101,4 +101,17 @@ function require_pip() {
         fi
     fi
     ok
+}
+
+function symlinkifne {
+    running "$1"
+
+    if [[ -L $1 ]]; then
+        # it's already a simlink (could have come from this project)
+        echo -en '\tsymlink exists, skipped\t';ok
+        return
+    fi
+    # create the link
+    ln -s ~/.dotfiles/$1 $1
+    echo -en 'linked';ok
 }
