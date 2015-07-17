@@ -47,6 +47,7 @@ symlinkifne .shellpaths
 symlinkifne .profile
 symlinkifne .zshrc
 symlinkifne .vimrc
+symlinkifne .ghci
 
 popd > /dev/null 2>&1
 
