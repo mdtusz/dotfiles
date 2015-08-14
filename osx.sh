@@ -58,7 +58,7 @@ fi
 ok
 
 bot "Installing vundle for vim."
-
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 ###############################################################################
 # Install command-line tools using Homebrew                                   #
@@ -82,8 +82,7 @@ require_brew vim --override-system-vi
 require_brew httpie
 
 bot "Installing homebrew language packages."
-require_brew elm-platform
-require_brew haskell-platform
+require_brew ghc
 
 ###############################################################################
 # Native Apps (via brew cask)                                                 #
@@ -107,6 +106,7 @@ require_cask transmission
 require_cask vlc
 require_cask alfred
 require_cask processing
+require_cask elm-platform
 require_cask bettertouchtool
 require_cask calibre
 
@@ -495,9 +495,9 @@ bot "Sublime Text."
 running "install Sublime Text Package Control"
 curl https://packagecontrol.io/Package%20Control.sublime-package > ~/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package;ok
 running "install Sublime Text settings"
-ln -s ./configs/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Preferences.sublime-settings;ok
+ln -f ./configs/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Preferences.sublime-settings;ok
 running "install Sublime Text packages"
-ln -s ./configs/Package\ Control.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Package\ Control.sublime-settings;ok
+ln -f ./configs/Package\ Control.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Package\ Control.sublime-settings;ok
 
 
 ###############################################################################
