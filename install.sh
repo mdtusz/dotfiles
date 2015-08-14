@@ -48,6 +48,7 @@ symlinkifne .profile
 symlinkifne .zshrc
 symlinkifne .vimrc
 symlinkifne .ghci
+symlinkifne .eslintrc
 
 popd > /dev/null 2>&1
 
