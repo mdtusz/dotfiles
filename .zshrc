@@ -35,3 +35,4 @@ setopt HIST_FIND_NO_DUPS
 
 # LaTeX things
 eval `/usr/libexec/path_helper -s`
+test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh

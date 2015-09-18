@@ -52,6 +52,6 @@ symlinkifne .eslintrc
 
 popd > /dev/null 2>&1
 
-./osx.sh
+#./osx.sh
 
 bot "Setup complete!"
