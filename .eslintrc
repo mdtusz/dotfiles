@@ -2,9 +2,9 @@
   "ecmaFeatures": {
       "blockBindings": true,
       "forOf": true,
-      "jsx": false,
+      "jsx": true,
       "arrowFunctions": true,
-      "destructuring": false,
+      "destructuring": true,
       "modules": true,
       "spread": true,
       
