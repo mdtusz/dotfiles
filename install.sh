@@ -1,57 +1,128 @@
 #!/usr/bin/env bash
 
-# Miklós Tusz' dotfiles for OSX.
-# Mega sweet super awesome setup
-
-# include my library helpers for colorized echo and require_brew, etc
 source ./lib.sh
 
-bot "Dotfile cat is gonna make your new machine all sparkly and awesome. But first:"
+# Start, and maintain sudo
+running "Installing all the things. Enter your password."
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-read -r -p "What is your first name? " firstname
-read -r -p "What is your last name? " lastname
-read -r -p "What is your email? " email
-read -r -p "What is your github.com username? " githubuser
-fullname="$firstname $lastname"
-
-bot "Let's get started, $firstname."
-
-# Change shell to zsh
-echo $0 | grep zsh > /dev/null 2>&1 | true
-if [[ ${PIPESTATUS[0]} != 0 ]]; then
-  running "Changing your login shell to zsh"
-  chsh -s $(which zsh);ok
+# Change shell
+# echo $SHELL | grep "zsh" > /dev/null 2>&1
+if [[ $? == '' ]]; then
+  action "Changing your shell to zsh."
+  sudo chsh -s $(which zsh);
+  ok "New shell is zsh."
 else
-  bot "Looks like you are already using zsh. Perfect."
+  ok "Shell is already zsh."
 fi
 
-running "install oh-my-zsh"
+
+# Oh My Zsh
 if [[ -e ~/.oh-my-zsh ]]; then
-  echo 'oh-my-zsh already installed';ok
+  ok "Oh My Zsh already installed."
 else
-  curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh;ok
+  action "Installing Oh My Zsh."
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  ok "Oh My Zsh successfully installed."
 fi
 
-pushd ~ > /dev/null 2>&1
+
+# Vim
+if [[ -e ~/.vim/autoload/plug.vim ]]; then
+  ok "Vim Plug already installed."
+else
+  action "Installing Vim Plug."
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  ok "Vim Plug installed."
+fi
 
 
-bot "Creating symlinks for project dotfiles..."
+# Homebrew
+which brew > /dev/null 2>&1
+if [[ $? != 0 ]]; then
+  action "Installing Homebrew."
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-symlinkifne .crontab
-symlinkifne .gitconfig
-symlinkifne .gitignore
-symlinkifne .shellaliases
-symlinkifne .shellfn
-symlinkifne .shellvars
-symlinkifne .shellpaths
-symlinkifne .profile
-symlinkifne .zshrc
-symlinkifne .vimrc
-symlinkifne .ghci
-symlinkifne .eslintrc
+  # Add casks
+  brew tap caskroom/versions
+  brew tap caskroom/fonts  
+  
+  ok "Homebrew successfully installed."
+else
+  ok "Homebrew already installed."
+fi
 
-popd > /dev/null 2>&1
 
-#./osx.sh
 
-bot "Setup complete!"
+# Pip
+which pip > /dev/null 2>&1
+if [[ $? != 0 ]]; then
+  action "Installing pip."
+  sudo easy_install pip
+
+  if [[ $? != 0 ]]; then
+    error "Unable to install pip."
+    exit -1
+  else
+    ok "Pip successfully installed."
+  fi
+else
+  ok "Pip already installed."
+fi
+
+
+# Npm
+which npm > /dev/null 2&1
+if [[ $? != 0 ]]; then
+  action "Installing npm."
+  brewi node
+  
+  if [[ $? != 0 ]]; then
+    error "Unable to install node."
+    exit -1
+  else
+    ok "Node successfully installed."
+  fi
+else
+  ok "Node already installed."
+fi
+
+
+# Update packages
+action "Updating homebrew and upgrading packages."
+brew update
+brew upgrade
+ok "Homebrew packages upgraded."  
+
+
+# Install section
+action "Installing software from manifests."
+
+while read line; do
+  caski $line
+done < cask.txt
+
+while read line; do
+  brewi $line
+done < brew.txt
+
+while read line; do
+  npmi $line
+done < npm.txt
+
+while read line; do
+  pipi $line
+done < pip.txt
+
+# while read lin; do
+#   gemi $line
+# done < gem.txt
+
+ok "Software installation complete."
+
+
+
+
+

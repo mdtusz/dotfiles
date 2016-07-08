@@ -2,7 +2,7 @@
   name = Miklós Tusz
   email = mdtusz@gmail.com
 [github]
-    user = mdtusz
+  user = mdtusz
 [push]
   default = simple
 [color]
@@ -24,11 +24,14 @@
   changed = green
   untracked = cyan
 [advice]
-    statusHints = true
+  statusHints = true
 [core]
-  editor = subl -w
+	editor = subl -w
   excludesfile = ~/.gitignore
 [alias]
   co = checkout
   d = diff --color-words
-  cam = commit -a -m
+  cam = commit -am
+  psu = push --set-upstream
+  reabse = rebase
+  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short

@@ -1,5 +1,3 @@
-#Brew
-export PATH=/usr/local/bin:$PATH:
-export PATH=/usr/local/sbin:$PATH:
-export PATH=$HOME/.dotfiles/scripts:$PATH:
-export PATH=$HOME/.cabal/bin:$PATH
+# Shell paths
+
+export PATH=$PATH:/$HOME/.dotfiles/scripts

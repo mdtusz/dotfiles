@@ -1,0 +1,14 @@
+ack
+ansible
+cloc
+fabric
+gifify
+htop
+httpie
+git
+hub
+lastpass-cli
+python3
+ssh-copy-id
+haskell-stack
+postgresql

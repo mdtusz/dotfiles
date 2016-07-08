@@ -1,8 +1,0 @@
-#!/bin/sh
-
-#########################################################################
-# Temporary aliases useful for demos, other current projects
-#########################################################################
-export MYDOWNLOADS=~/Downloads
-export MYDOCUMENTS=~/Documents
-export SANDBOX=~/Code/Sandbox

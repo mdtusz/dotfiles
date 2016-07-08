@@ -1,36 +1,16 @@
-#########################################
-# Commands to run apps
+# Shell aliases
+
 alias sub='subl -s'
-alias unarch='~/Applications/The\ Unarchiver.app/Contents/MacOS/The\ Unarchiver'
-alias pms='python -m SimpleHTTPServer'
+alias pms='python2.7 -m SimpleHTTPServer'
 
-#########################################
-# Commands to change dirs
-alias to.downloads='cd ${MYDOWNLOADS}'
-alias to.dropbox='cd ~/Dropbox'
-alias to.docs='cd ${MYDOCUMENTS}'
-alias to.sandbox='cd ${SANDBOX}'
-
-#########################################
-# Docker
-alias dm=docker-machine
-alias dicker=docker
+alias dm='docker-machine'
 alias dpsa='docker ps -a'
-alias dc=docker-compose
+alias dc='docker-compose'
 
-#########################################
-# Rust
-alias cr='cargo run'
-alias cb='cargo build'
-alias ct='cargo test'
+alias python='python3'
 
-#############################
-# Utilities
+alias git='hub'
 
-# Directory listings
-alias ls='ls -G -h -p '
-alias ll='ls -l -G -h -p '
-
-# Navigation
 alias ..='cd ..'
 alias ...='cd .. && cd ..'
+alias ....='cd .. && cd .. & cd ..'
