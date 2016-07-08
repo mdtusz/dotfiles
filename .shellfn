@@ -20,3 +20,12 @@ function meteogram() {
   finger $1@graph.no
 }
 
+function showfiles() {
+  defaults write com.apple.finder AppleShowAllFiles YES
+  killall Finder
+}
+
+function hidefiles() {
+  defaults write com.apple.finder AppleShowAllFiles NO
+  killall Finder
+}
