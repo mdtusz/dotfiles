@@ -25,23 +25,23 @@ function error() {
 
 function symifne() {
   action "Linking $1."
-  
+
   if [[ -L $1 ]]; then
     ok "Symlink exists."
     return
   fi
 
   ln -s ~/.dotfiles/$1 $1
-  ok "Linked $1."; 
+  ok "Linked $1.";
 }
 
 npmi() {
   npm list -g | grep $1 > /dev/null 2>&1
-  
+
   if [[ $? != 0 ]]; then
     action "NPM installing $1."
     npm install -g $1
-    
+
     if [[ $? != 0 ]]; then
       error "Failed to install $1!"
       exit -1
@@ -53,11 +53,11 @@ npmi() {
 
 function pipi() {
   pip3 show $1 > /dev/null 2>&1
-  
+
   if [[ $? != 0 ]]; then
     action "Pip installing $1."
     sudo pip3 install $1
-    
+
     if [[ $? != 0 ]]; then
       error "Failed to install $1!"
       exit -1
@@ -73,7 +73,7 @@ function brewi() {
   if [[ $? != 0 ]]; then
     action "Brew installing $1."
     brew install $1
-    
+
     if [[ $? != 0 ]]; then
       error "Failed to install $1!"
       exit -1
@@ -85,11 +85,11 @@ function brewi() {
 
 function caski() {
   brew cask list $1 > /dev/null 2>&1
-  
+
   if [[ $? != 0 ]]; then
     action "Cask installing $1."
     brew cask install $1
-    
+
     if [[ $? != 0 ]]; then
       error "Failed to install $1!"
       exit -1
@@ -98,14 +98,14 @@ function caski() {
     fi
   fi
 }
- 
+
 function gemi() {
   gem list --local | grep $1 | head -1 | cut -d' ' -f1 > /dev/null 2>&1
-  
+
   if [[ $? != $1 ]]; then
     action "Gem installing $1."
     gem install $1
-    
+
     if [[ $? != 0 ]]; then
       error "Failed to install $1!"
       exit -1

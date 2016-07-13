@@ -3,12 +3,13 @@ ansible
 cloc
 fabric
 gifify
+git
+haskell-stack
 htop
 httpie
-git
 hub
-lastpass-cli
+imagemagick
+postgresql
 python3
 ssh-copy-id
-haskell-stack
-postgresql
+vim
