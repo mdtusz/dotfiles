@@ -1,14 +1,6 @@
 # Shell aliases
 
-alias sub='subl -s'
 alias pms='python2.7 -m SimpleHTTPServer'
-
-alias dm='docker-machine'
-alias dpsa='docker ps -a'
-alias dc='docker-compose'
-
-alias python='python3'
-
 alias git='hub'
 
 alias ..='cd ..'

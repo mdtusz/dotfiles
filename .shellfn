@@ -4,14 +4,6 @@ function manp() {
   man -t $1 | open -fa /Applications/Preview.app
 }
 
-function dmc() {
-  if [[ "$#" != 1 ]]; then
-    echo "DMC needs an argument to run."
-  else
-    eval "$(docker-machine env $1)"
-  fi
-}
-
 function weather() {
   curl wttr.in/$1
 }
@@ -29,3 +21,4 @@ function hidefiles() {
   defaults write com.apple.finder AppleShowAllFiles NO
   killall Finder
 }
+

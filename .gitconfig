@@ -1,5 +1,5 @@
 [user]
-  name = Miklós Tusz
+  name = Miklós Tusz
   email = mdtusz@gmail.com
 [github]
   user = mdtusz
@@ -26,7 +26,7 @@
 [advice]
   statusHints = true
 [core]
-	editor = vim
+  editor = vim
   excludesfile = ~/.gitignore
 [alias]
   co = checkout

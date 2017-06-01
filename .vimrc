@@ -6,26 +6,27 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
-Plug 'honza/vim-snippets'
+Plug 'mattn/emmet-vim'
 Plug 'raimondi/delimitmate'
-Plug 'scrooloose/syntastic'
+Plug 'sbdchd/neoformat'
 Plug 'sheerun/vim-polyglot'
-Plug 'sirver/ultisnips'
+Plug 'sirtaj/vim-openscad'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'fsharp/vim-fsharp', {
-      \ 'for': 'fsharp',
-      \ 'do':  'make fsautocomplete',
-      \}
 Plug 'tpope/vim-vinegar'
+Plug 'valloric/youcompleteme'
 Plug 'vim-airline/vim-airline'
 Plug 'vimwiki/vimwiki'
+Plug 'w0rp/ale'
 
 call plug#end()
 
+set updatetime=100
+
 set number
 set ruler
-set textwidth=80
+set textwidth=0
 set colorcolumn=+1
 set laststatus=2
 set showcmd
@@ -52,6 +53,7 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set autoindent
+set smartindent
 set copyindent
 set expandtab
 set shiftround
@@ -62,18 +64,31 @@ set wildignore=*.o,*~,*.pyc
 set splitbelow
 set splitright
 
-autocmd FileType haskell setlocal shiftwidth=2 softtabstop=2 tabstop=2
+
+autocmd FileType haskell,javascript setlocal shiftwidth=2 softtabstop=2 tabstop=2
 autocmd BufWritePre *[js|cpp|py|html|css|hs] %s/\s\+$//e
+
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * Neoformat
+augroup END
+
+augroup wrapper
+    autocmd BufEnter * highlight OverLength ctermbg=blue ctermfg=black
+    autocmd BufEnter * match OverLength /\%81v.*/
+augroup END
 
 command Bd bp|bd #
 command Vsp vsp|bp
 
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-    \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-    \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+let mapleader = "\<Space>"
+map <Leader><TAB> <C-w><C-w>
+
+inoremap <S-CR> <Esc>O
+imap ✠ <S-CR>
+
 
 " Custom colorscheme
-" colorscheme slate
 set background=light
 highlight LineNr ctermfg=darkgray
 highlight ColorColumn ctermbg=none ctermfg=darkgray cterm=underline
@@ -95,13 +110,6 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-" Syntastic
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_python_checkers = ['pep8', 'pyflakes', 'python']
-
 " Vimwiki
 let g:vimwiki_list = [{
             \'path': '~/Documents/Wiki/vimwiki',
@@ -109,3 +117,31 @@ let g:vimwiki_list = [{
             \'template_path': '~/Documents/Wiki/templates',
             \'auto_export': 1,
             \'auto_tags': 1}]
+
+" Gitgutter
+let g:gitgutter_realtime = 1
+let g:gitgutter_async = 1
+
+" Neoformat
+let g:neoformat_enabled_html = []
+let g:neoformat_python_yapf = {
+    \ 'exe': 'yapf',
+    \ 'args': ['--style', 'google']
+    \ }
+let g:neoformat_enabled_python = ['yapf']
+let g:neoformat_enabled_javascript = ['prettier']
+
+" Ale
+let g:ale_sign_column_always = 1
+let g:ale_linters = {
+    \ 'javascript': ['eslint'],
+    \ 'python': ['flake8'],
+    \ 'html': [],
+    \}
+
+" YCM
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+" DelimitMate
+let g:delimitMate_expand_cr = 2
+

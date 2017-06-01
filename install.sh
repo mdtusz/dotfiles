@@ -47,46 +47,11 @@ if [[ $? != 0 ]]; then
 
   # Add casks
   brew tap caskroom/versions
-  brew tap caskroom/fonts  
-  
+  brew tap caskroom/fonts
+
   ok "Homebrew successfully installed."
 else
   ok "Homebrew already installed."
-fi
-
-
-
-# Pip
-which pip > /dev/null 2>&1
-if [[ $? != 0 ]]; then
-  action "Installing pip."
-  sudo easy_install pip
-
-  if [[ $? != 0 ]]; then
-    error "Unable to install pip."
-    exit -1
-  else
-    ok "Pip successfully installed."
-  fi
-else
-  ok "Pip already installed."
-fi
-
-
-# Npm
-which npm > /dev/null 2&1
-if [[ $? != 0 ]]; then
-  action "Installing npm."
-  brewi node
-  
-  if [[ $? != 0 ]]; then
-    error "Unable to install node."
-    exit -1
-  else
-    ok "Node successfully installed."
-  fi
-else
-  ok "Node already installed."
 fi
 
 
@@ -94,7 +59,7 @@ fi
 action "Updating homebrew and upgrading packages."
 brew update
 brew upgrade
-ok "Homebrew packages upgraded."  
+ok "Homebrew packages upgraded."
 
 
 # Install section
@@ -115,10 +80,6 @@ done < npm.txt
 while read line; do
   pipi $line
 done < pip.txt
-
-# while read lin; do
-#   gemi $line
-# done < gem.txt
 
 ok "Software installation complete."
 

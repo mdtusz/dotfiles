@@ -1,7 +1,12 @@
+adobe-creative-cloud
 alfred
-dockertoolbox
 firefox
+font-consolas-for-powerline
 font-dejavu-sans
+font dejavu-sans-mono-for-powerline
+font-fira-mono-for-powerline
+font-monofur-for-powerline
+font-roboto-mono-for-powerline
 font-source-code-pro
 font-source-code-pro-for-powerline
 gitup
@@ -9,10 +14,10 @@ google-chrome
 google-chrome-canary
 hammerspoon
 iterm2-beta
-limechat
+keybase
 skype
 spotify
-sublime-text
+steam
 the-unarchiver
 transmission
 vagrant
