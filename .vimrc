@@ -75,7 +75,7 @@ augroup END
 
 augroup wrapper
     autocmd BufEnter * highlight OverLength ctermbg=blue ctermfg=black
-    autocmd BufEnter * match OverLength /\%81v.*/
+    autocmd BufEnter * match OverLength /\%82v.*/
 augroup END
 
 command Bd bp|bd #
@@ -88,12 +88,14 @@ inoremap <S-CR> <Esc>O
 imap ✠ <S-CR>
 
 
+
 " Custom colorscheme
 set background=light
 highlight LineNr ctermfg=darkgray
 highlight ColorColumn ctermbg=none ctermfg=darkgray cterm=underline
 highlight VertSplit cterm=none ctermfg=darkgray
 highlight MatchParen ctermbg=blue ctermfg=black
+highlight SpellBad ctermbg=red ctermfg=white
 
 " File Explorer
 let g:netrw_liststyle = 3
@@ -103,7 +105,7 @@ let g:netrw_list_hide = '.*\.swp$,\~$,\.orig$,\.pyc$'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_max_files = 0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|dist)|(\.(swp|git|svn))$'
+let g:ctrlp_custom_ignore = '\v[\/](venv|node_modules|dist)|(\.(swp|git|svn))$'
 
 " Airline
 let g:airline_powerline_fonts = 1
@@ -124,15 +126,20 @@ let g:gitgutter_async = 1
 
 " Neoformat
 let g:neoformat_enabled_html = []
+let g:neoformat_enabled_python = ['yapf']
 let g:neoformat_python_yapf = {
     \ 'exe': 'yapf',
     \ 'args': ['--style', 'google']
     \ }
-let g:neoformat_enabled_python = ['yapf']
 let g:neoformat_enabled_javascript = ['prettier']
+let g:neoformat_javascript_prettier = {
+    \ 'exe': 'prettier',
+    \ 'args': ['--parser', 'flow', '--single-quote']
+    \ }
 
 " Ale
 let g:ale_sign_column_always = 1
+let g:ale_python_flake8_executable = 'flake8'
 let g:ale_linters = {
     \ 'javascript': ['eslint'],
     \ 'python': ['flake8'],
