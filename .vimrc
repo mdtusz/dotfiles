@@ -1,16 +1,22 @@
 filetype plugin indent on
 syntax on
 
+if has('python3')
+  silent! python3 1
+endif
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
+Plug 'honza/vim-snippets'
+Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
 Plug 'raimondi/delimitmate'
-Plug 'sbdchd/neoformat'
 Plug 'sheerun/vim-polyglot'
 Plug 'sirtaj/vim-openscad'
+Plug 'sirver/ultisnips'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -18,23 +24,20 @@ Plug 'tpope/vim-vinegar'
 Plug 'valloric/youcompleteme'
 Plug 'vim-airline/vim-airline'
 Plug 'vimwiki/vimwiki'
+Plug 'wlangstroth/vim-racket'
 Plug 'w0rp/ale'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
+set encoding=UTF-8
 set updatetime=100
-
-set number
-set ruler
-set textwidth=0
-set colorcolumn=+1
-set laststatus=2
-set showcmd
-set cursorline
 set lazyredraw
-set showmatch
 set noswapfile
 set noerrorbells
+
+set number relativenumber
+set laststatus=2
 set mouse=a
 set history=1000
 set backspace=2
@@ -43,11 +46,9 @@ set clipboard=unnamed
 set confirm
 set hidden
 
+set showmatch
 set nohlsearch
 set incsearch
-
-set relativenumber
-set number
 
 set tabstop=4
 set shiftwidth=4
@@ -59,41 +60,38 @@ set expandtab
 set shiftround
 
 set wildmenu
-set wildignore=*.o,*~,*.pyc
+set wildignore=*.o,*~,*.pyc,__pycache__/
 
 set splitbelow
 set splitright
 
 
-autocmd FileType haskell,javascript setlocal shiftwidth=2 softtabstop=2 tabstop=2
+autocmd FileType haskell,javascript,cpp setlocal shiftwidth=2 softtabstop=2 tabstop=2
 autocmd BufWritePre *[js|cpp|py|html|css|hs] %s/\s\+$//e
 
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * Neoformat
-augroup END
-
 augroup wrapper
-    autocmd BufEnter * highlight OverLength ctermbg=blue ctermfg=black
-    autocmd BufEnter * match OverLength /\%82v.*/
+    autocmd BufEnter * highlight OverLength ctermbg=blue ctermfg=darkgray
+    autocmd BufEnter * match OverLength /\%88v.*/
 augroup END
 
 command Bd bp|bd #
 command Vsp vsp|bp
+command Wq wq
+command W w
 
-let mapleader = "\<Space>"
-map <Leader><TAB> <C-w><C-w>
 
+map <Leader><TAB> <C-w>h
+map <Leader><Leader> <C-w><C-w>
+
+" Adds shift-enter for newline above
 inoremap <S-CR> <Esc>O
 imap ✠ <S-CR>
-
-
 
 " Custom colorscheme
 set background=light
 highlight LineNr ctermfg=darkgray
 highlight ColorColumn ctermbg=none ctermfg=darkgray cterm=underline
-highlight VertSplit cterm=none ctermfg=darkgray
+highlight VertSplit cterm=none ctermfg=black
 highlight MatchParen ctermbg=blue ctermfg=black
 highlight SpellBad ctermbg=red ctermfg=white
 
@@ -105,7 +103,7 @@ let g:netrw_list_hide = '.*\.swp$,\~$,\.orig$,\.pyc$'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_max_files = 0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_custom_ignore = '\v[\/](venv|node_modules|dist)|(\.(swp|git|svn))$'
+let g:ctrlp_custom_ignore = '\v[\/](__pycache__|venv|node_modules|dist|target)|(\.(swp|git|svn|pyc))$'
 
 " Airline
 let g:airline_powerline_fonts = 1
@@ -123,32 +121,49 @@ let g:vimwiki_list = [{
 " Gitgutter
 let g:gitgutter_realtime = 1
 let g:gitgutter_async = 1
-
-" Neoformat
-let g:neoformat_enabled_html = []
-let g:neoformat_enabled_python = ['yapf']
-let g:neoformat_python_yapf = {
-    \ 'exe': 'yapf',
-    \ 'args': ['--style', 'google']
-    \ }
-let g:neoformat_enabled_javascript = ['prettier']
-let g:neoformat_javascript_prettier = {
-    \ 'exe': 'prettier',
-    \ 'args': ['--parser', 'flow', '--single-quote']
-    \ }
+let g:gitgutter_sign_added = '|+'
+let g:gitgutter_sign_removed = '|-'
+let g:gitgutter_sign_modified = '|~'
+let g:gitgutter_max_signs = 1000
 
 " Ale
 let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 0
+
 let g:ale_python_flake8_executable = 'flake8'
+let g:ale_python_mypy_options = "--ignore-missing-imports"
+let g:ale_python_flake8_options = "--max-line-length=88"
 let g:ale_linters = {
-    \ 'javascript': ['eslint'],
-    \ 'python': ['flake8'],
+    \ 'javascript': ['eslint', 'flow'],
+    \ 'python': ['flake8', 'mypy'],
     \ 'html': [],
+    \ 'rust': ['rls'],
+    \ 'cpp': ['clang-format']
+    \}
+
+let g:ale_fix_on_save = 1
+let g:ale_javascript_prettier_options = '--single-quote'
+let g:ale_scss_prettier_options = '--parser css'
+let g:ale_fixers = {
+    \ 'python': ['black'],
+    \ 'scss': ['prettier'],
+    \ 'javascript': ['prettier'],
+    \ 'rust': ['rustfmt'],
+    \ 'cpp': ['clang-format']
     \}
 
 " YCM
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_python_binary_path = 'python'
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:ycm_max_diagnostics_to_display = 0
+
 
 " DelimitMate
 let g:delimitMate_expand_cr = 2
 
+" TagBar
+nmap <F8> :TagbarToggle<CR>
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<C-j>"
