@@ -5,14 +5,12 @@ ZSH_THEME="miloshadzic"
 ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
 export LANG=en_US.UTF-8
 export EDITOR='vim'
-
-# ssh
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # Load aliases, paths etc
