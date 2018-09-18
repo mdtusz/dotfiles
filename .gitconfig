@@ -35,3 +35,5 @@
   psu = push --set-upstream
   reabse = rebase
   hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+[pager]
+  branch = false
