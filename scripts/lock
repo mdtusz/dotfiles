@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+SCREEN=/tmp/screen.png
+BLURRED=/tmp/lockscreen.png
+
+/usr/bin/maim $SCREEN
+/usr/bin/ffmpeg -y -i $SCREEN -filter_complex "boxblur=10:1" $BLURRED > /dev/null 2>&1
+/usr/bin/i3lock -i $BLURRED -u
+
+rm -r $SCREEN $BLURRED
