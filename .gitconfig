@@ -34,6 +34,7 @@
   cam = commit -am
   psu = push --set-upstream
   reabse = rebase
-  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  hist = log --graph --decorate --oneline
+  tree = log --all --graph --decorate --oneline
 [pager]
   branch = false
