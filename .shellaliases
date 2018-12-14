@@ -6,3 +6,7 @@ alias git='hub'
 alias ..='cd ..'
 alias ...='cd .. && cd ..'
 alias ....='cd .. && cd .. & cd ..'
+
+alias red='redshift -O 1000'
+alias blue='redshift -x'
+alias invert='xcalib -invert -alter'
