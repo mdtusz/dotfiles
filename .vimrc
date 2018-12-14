@@ -1,15 +1,12 @@
 filetype plugin indent on
 syntax on
 
-if has('python3')
-  silent! python3 1
-endif
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
+Plug 'fisadev/vim-isort'
 Plug 'honza/vim-snippets'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
@@ -18,10 +15,10 @@ Plug 'sheerun/vim-polyglot'
 Plug 'sirtaj/vim-openscad'
 Plug 'sirver/ultisnips'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
-Plug 'valloric/youcompleteme'
 Plug 'vim-airline/vim-airline'
 Plug 'vimwiki/vimwiki'
 Plug 'wlangstroth/vim-racket'
@@ -65,12 +62,11 @@ set wildignore=*.o,*~,*.pyc,__pycache__/
 set splitbelow
 set splitright
 
-
 autocmd FileType haskell,javascript,cpp setlocal shiftwidth=2 softtabstop=2 tabstop=2
 autocmd BufWritePre *[js|cpp|py|html|css|hs] %s/\s\+$//e
 
 augroup wrapper
-    autocmd BufEnter * highlight OverLength ctermbg=blue ctermfg=darkgray
+    autocmd BufEnter * highlight OverLength ctermbg=darkblue ctermfg=white
     autocmd BufEnter * match OverLength /\%88v.*/
 augroup END
 
@@ -89,7 +85,7 @@ imap ✠ <S-CR>
 
 " Custom colorscheme
 set background=light
-highlight LineNr ctermfg=darkgray
+highlight LineNr term=none cterm=none ctermfg=237
 highlight ColorColumn ctermbg=none ctermfg=darkgray cterm=underline
 highlight VertSplit cterm=none ctermfg=black
 highlight MatchParen ctermbg=blue ctermfg=black
@@ -127,37 +123,33 @@ let g:gitgutter_sign_modified = '|~'
 let g:gitgutter_max_signs = 1000
 
 " Ale
+let g:ale_completion_enabled = 1
+let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
 let g:ale_set_highlights = 0
 
-let g:ale_python_flake8_executable = 'flake8'
-let g:ale_python_mypy_options = "--ignore-missing-imports"
+let g:ale_python_flake8_auto_pipenv= 1
 let g:ale_python_flake8_options = "--max-line-length=88"
+let g:ale_python_mypy_auto_pipenv = 1
+let g:ale_python_mypy_options = "--ignore-missing-imports"
 let g:ale_linters = {
-    \ 'javascript': ['eslint', 'flow'],
+    \ 'javascript': [],
     \ 'python': ['flake8', 'mypy'],
-    \ 'html': [],
+    \ 'cpp': ['clang-format'],
     \ 'rust': ['rls'],
-    \ 'cpp': ['clang-format']
+    \ 'html': [],
     \}
 
-let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_options = '--single-quote'
 let g:ale_scss_prettier_options = '--parser css'
+let g:ale_python_black_auto_pipenv = 1
 let g:ale_fixers = {
-    \ 'python': ['black'],
-    \ 'scss': ['prettier'],
     \ 'javascript': ['prettier'],
+    \ 'python': ['black', 'isort'],
     \ 'rust': ['rustfmt'],
-    \ 'cpp': ['clang-format']
+    \ 'cpp': ['clang-format'],
+    \ 'scss': ['prettier'],
     \}
-
-" YCM
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_python_binary_path = 'python'
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-let g:ycm_max_diagnostics_to_display = 0
-
 
 " DelimitMate
 let g:delimitMate_expand_cr = 2
