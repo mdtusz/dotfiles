@@ -31,10 +31,11 @@
 [alias]
   co = checkout
   d = diff --color-words
-  cam = commit -am
   psu = push --set-upstream
   reabse = rebase
   hist = log --graph --decorate --oneline
   tree = log --all --graph --decorate --oneline
 [pager]
   branch = false
+[status]
+  submoduleSummary = true
