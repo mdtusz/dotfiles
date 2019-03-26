@@ -20,6 +20,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vimwiki/vimwiki'
 Plug 'wlangstroth/vim-racket'
 Plug 'w0rp/ale'
@@ -66,7 +67,7 @@ autocmd FileType haskell,javascript,cpp setlocal shiftwidth=2 softtabstop=2 tabs
 autocmd BufWritePre *[js|cpp|py|html|css|hs] %s/\s\+$//e
 
 augroup wrapper
-    autocmd BufEnter * highlight OverLength ctermbg=darkblue ctermfg=white
+    autocmd BufEnter * highlight OverLength ctermbg=black ctermfg=white
     autocmd BufEnter * match OverLength /\%88v.*/
 augroup END
 
@@ -74,7 +75,6 @@ command Bd bp|bd #
 command Vsp vsp|bp
 command Wq wq
 command W w
-
 
 map <Leader><TAB> <C-w>h
 map <Leader><Leader> <C-w><C-w>
@@ -90,6 +90,15 @@ highlight ColorColumn ctermbg=none ctermfg=darkgray cterm=underline
 highlight VertSplit cterm=none ctermfg=black
 highlight MatchParen ctermbg=blue ctermfg=black
 highlight SpellBad ctermbg=red ctermfg=white
+highlight GitGutterAdd ctermfg=green
+highlight GitGutterChange ctermfg=yellow
+highlight GitGutterDelete ctermfg=red
+highlight GitGutterChangeDelete ctermfg=blue
+
+highlight DiffAdd term=bold ctermbg=green ctermfg=none
+highlight DiffDelete term=bold ctermbg=red ctermfg=none
+highlight DiffChange term=bold ctermbg=yellow ctermfg=none
+highlight DiffText term=bold  ctermbg=none ctermfg=none
 
 " File Explorer
 let g:netrw_liststyle = 3
@@ -120,6 +129,7 @@ let g:gitgutter_async = 1
 let g:gitgutter_sign_added = '|+'
 let g:gitgutter_sign_removed = '|-'
 let g:gitgutter_sign_modified = '|~'
+let g:gitgutter_sign_modified_removed = '|<'
 let g:gitgutter_max_signs = 1000
 
 " Ale
@@ -129,13 +139,13 @@ let g:ale_sign_column_always = 1
 let g:ale_set_highlights = 0
 
 let g:ale_python_flake8_auto_pipenv= 1
-let g:ale_python_flake8_options = "--max-line-length=88"
+let g:ale_python_flake8_options = ""
 let g:ale_python_mypy_auto_pipenv = 1
 let g:ale_python_mypy_options = "--ignore-missing-imports"
 let g:ale_linters = {
-    \ 'javascript': [],
-    \ 'python': ['flake8', 'mypy'],
-    \ 'cpp': ['clang-format'],
+    \ 'javascript': ['prettier'],
+    \ 'python': ['pyls', 'flake8', 'mypy'],
+    \ 'cpp': ['ccls', 'clang-format'],
     \ 'rust': ['rls'],
     \ 'html': [],
     \}
@@ -150,6 +160,11 @@ let g:ale_fixers = {
     \ 'cpp': ['clang-format'],
     \ 'scss': ['prettier'],
     \}
+
+set completeopt+=preview
+set completeopt+=menuone
+set completeopt+=noinsert
+set completeopt+=noselect
 
 " DelimitMate
 let g:delimitMate_expand_cr = 2
