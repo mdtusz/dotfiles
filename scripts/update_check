@@ -1,0 +1,11 @@
+#! /bin/bash 
+
+UPDATES=$(yay -Qu)
+
+if [[ -z "${UPDATES//}" ]]; then
+    echo "No Updates"
+    racket /home/miklos/Code/boop/main.rkt -t "Updates" -s "No updates today!" -w 2000 &
+else
+    echo "Updates"
+    racket /home/miklos/Code/boop/main.rkt -t "Updates" -s "Updates found!" -w 2000 &
+fi

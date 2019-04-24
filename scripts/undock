@@ -3,3 +3,6 @@ xrandr \
     --output DVI-I-1-1 --off \
     --output DVI-I-2-2 --off
 i3-msg restart
+
+pacmd unload-module module-udev-detect && pacmd load-module module-udev-detect
+
