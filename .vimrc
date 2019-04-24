@@ -8,6 +8,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'fisadev/vim-isort'
 Plug 'honza/vim-snippets'
+Plug 'junegunn/goyo.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
 Plug 'raimondi/delimitmate'
@@ -63,7 +64,7 @@ set wildignore=*.o,*~,*.pyc,__pycache__/
 set splitbelow
 set splitright
 
-autocmd FileType haskell,javascript,cpp setlocal shiftwidth=2 softtabstop=2 tabstop=2
+autocmd FileType haskell,javascript,json,cpp setlocal shiftwidth=2 softtabstop=2 tabstop=2
 autocmd BufWritePre *[js|cpp|py|html|css|hs] %s/\s\+$//e
 
 augroup wrapper
@@ -121,6 +122,11 @@ let g:vimwiki_list = [{
             \'path_html': '~/Documents/Wiki/vimwiki_html',
             \'template_path': '~/Documents/Wiki/templates',
             \'auto_export': 1,
+            \'auto_tags': 1}, {
+            \'path': '~/Documents/Wiki/aonwiki',
+            \'path_html': '~/Documents/Wiki/aonwiki_html',
+            \'template_path': '~/Documents/Wiki/templates',
+            \'auto_export': 1,
             \'auto_tags': 1}]
 
 " Gitgutter
@@ -143,11 +149,12 @@ let g:ale_python_flake8_options = ""
 let g:ale_python_mypy_auto_pipenv = 1
 let g:ale_python_mypy_options = "--ignore-missing-imports"
 let g:ale_linters = {
-    \ 'javascript': ['prettier'],
+    \ 'javascript': ['prettier', 'eslint'],
     \ 'python': ['pyls', 'flake8', 'mypy'],
     \ 'cpp': ['ccls', 'clang-format'],
     \ 'rust': ['rls'],
     \ 'html': [],
+    \ 'shell': ['shellcheck'],
     \}
 
 let g:ale_javascript_prettier_options = '--single-quote'
@@ -155,6 +162,7 @@ let g:ale_scss_prettier_options = '--parser css'
 let g:ale_python_black_auto_pipenv = 1
 let g:ale_fixers = {
     \ 'javascript': ['prettier'],
+    \ 'json': ['prettier'],
     \ 'python': ['black', 'isort'],
     \ 'rust': ['rustfmt'],
     \ 'cpp': ['clang-format'],
