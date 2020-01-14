@@ -5,7 +5,7 @@ ZSH_THEME="miloshadzic"
 # ENABLE_CORRECTION="false"
 # COMPLETION_WAITING_DOTS="true"
 
-plugins=(git zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting gpg-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -17,3 +17,6 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 source ${HOME}/.shellaliases
 source ${HOME}/.shellpaths
 source ${HOME}/.shellfn
+
+# Initialize nvm.
+source /usr/share/nvm/init-nvm.sh
