@@ -1,11 +1,7 @@
 # Shell paths
 
-export GOPATH=$HOME/Code/Go
+export GOPATH=$HOME/Code/go
 export PYENV_ROOT=$HOME/.pyenv
-export npm_config_prefix=~/.node_modules
-
-# Global modules are user local.
-PATH=$HOME/.node_modules/bin:$PATH
 
 # Quick scripts and helpers.
 PATH=$HOME/.dotfiles/scripts:$PATH
@@ -15,5 +11,8 @@ PATH=$PYENV_ROOT/bin:$PATH
 
 # Rust binaries.
 PATH=$HOME/.cargo/bin:$PATH
+
+# Go binaries.
+PATH=$GOPATH/bin:$PATH
 
 export PATH=$PATH

@@ -1,3 +1,4 @@
+#! /bin/sh
 # Shell functions
 
 function manp() {
@@ -23,12 +24,12 @@ function hidefiles() {
 }
 
 function colorscheme() {
-    RANDOM=$$$(date +%s)
+    RANDOM=$1
 
     SCHEMES=($(ls -1 $HOME/.config/kitty/base16-kitty/colors))
     SCHEME=${SCHEMES[$RANDOM % ${#SCHEMES[@]}]}
 
     kitty @ set-colors --all --configured $HOME/.config/kitty/base16-kitty/colors/$SCHEME
 
-    echo "Colorscheme set to $SCHEME."
+    echo "Colorscheme set to $SCHEME. ($RANDOM)"
 }
