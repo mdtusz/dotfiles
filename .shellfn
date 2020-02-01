@@ -1,35 +1,48 @@
 #! /bin/sh
 # Shell functions
 
-function manp() {
-  man -t $1 | open -fa /Applications/Preview.app
+weather() {
+  curl "wttr.in/$1"
 }
 
-function weather() {
-  curl wttr.in/$1
+meteogram() {
+  finger "$1@graph.no"
 }
 
-function meteogram() {
-  finger $1@graph.no
+colorscheme() {
+    NUM=$1
+
+    SCHEMES=($(ls -1 "$HOME/.config/kitty/base16-kitty/colors"))
+
+    while true
+    do
+        SCHEME="${SCHEMES[$NUM % ${#SCHEMES[@]}]}"
+        kitty @ set-colors --all --configured "$HOME/.config/kitty/base16-kitty/colors/$SCHEME"
+        echo "Colorscheme set to $SCHEME. ($NUM)"
+        NUM=$((NUM + 1))
+        sleep 1
+    done
 }
 
-function showfiles() {
-  defaults write com.apple.finder AppleShowAllFiles YES
-  killall Finder
+spinfo() {
+    ALBUM_ART=$(playerctl metadata mpris:artUrl)
+    ARTIST=$(playerctl metadata xesam:artist)
+    ALBUM=$(playerctl metadata xesam:album)
+    TITLE=$(playerctl metadata xesam:title)
+    icat "$ALBUM_ART"
+    echo "$TITLE"
+    echo "$ALBUM"
+    echo "$ARTIST"
+    iclear 3
+    clear
 }
 
-function hidefiles() {
-  defaults write com.apple.finder AppleShowAllFiles NO
-  killall Finder
+iclear() {
+    SLEEP=${1:-0}
+    sleep "$SLEEP"
+    kitty +kitten icat --clear
 }
 
-function colorscheme() {
-    RANDOM=$1
-
-    SCHEMES=($(ls -1 $HOME/.config/kitty/base16-kitty/colors))
-    SCHEME=${SCHEMES[$RANDOM % ${#SCHEMES[@]}]}
-
-    kitty @ set-colors --all --configured $HOME/.config/kitty/base16-kitty/colors/$SCHEME
-
-    echo "Colorscheme set to $SCHEME. ($RANDOM)"
+icat() {
+    kitty +kitten icat --align left "$1"
 }
