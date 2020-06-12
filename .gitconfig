@@ -5,6 +5,8 @@
     user = mdtusz
 [push]
     default = simple
+[pull]
+	ff = only
 [color]
     ui = auto
     diff = auto
@@ -35,6 +37,7 @@
     reabse = rebase
     hist = log --graph --decorate --oneline
     tree = log --all --graph --decorate --oneline
+    merges = log --graph --decorate --oneline --merges
 [pager]
     branch = false
 [status]

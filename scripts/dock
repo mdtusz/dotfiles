@@ -1,7 +1,27 @@
 #! /bin/sh
-xrandr \
-    --output DVI-I-1-1 --auto --left-of DVI-I-2-2 --rotate left  \
-    --output DVI-I-2-2 --auto --above eDP-1 
+export DISPLAY=:0
+export XAUTHORITY=/home/miklos/.Xauthority
+
+
+HOME_MONITOR=$(xrandr | grep "HDMI-2 connected")
+WORK_MONITOR=$(xrandr | grep "DVI-I-1-1 connected")
+
+if [[ $HOME_MONITOR && $WORK_MONITOR ]]; then
+    xrandr \
+        --output HDMI-2 --auto --above eDP-1 \
+        --output DVI-I-1-1 --auto --rotate right --right-of DVI-I-2-2 \
+        --output DVI-I-2-2 --auto --right-of HDMI-2 
+elif [[ $WORK_MONITOR ]]; then
+    xrandr \
+        --output DVI-I-1-1 --auto --left-of DVI-I-2-2 \
+        --output DVI-I-2-2 --auto --above eDP-1 
+else
+    xrandr \
+        --output HDMI-2 --off
+        --output DVI-I-1-1 --off
+        --output DVI-I-2-2 --off
+fi
+
 i3-msg restart
 
-pacmd unload-module module-udev-detect && pacmd load-module module-udev-detect
+# pacmd unload-module module-udev-detect && pacmd load-module module-udev-detect

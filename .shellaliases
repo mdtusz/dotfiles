@@ -10,3 +10,7 @@ alias ....='cd .. && cd .. & cd ..'
 alias red='redshift -O 1000'
 alias blue='redshift -x'
 alias invert='xcalib -invert -alter'
+
+alias venv='source venv/bin/activate'
+
+alias open='xdg-open'

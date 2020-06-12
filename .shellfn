@@ -1,10 +1,12 @@
 #! /bin/sh
 # Shell functions
 
+# Display the weather. Optionally, provide a location argument.
 weather() {
   curl "wttr.in/$1"
 }
 
+# Display more detailed wind and cloud weather for a location. 
 meteogram() {
   finger "$1@graph.no"
 }
@@ -12,12 +14,12 @@ meteogram() {
 colorscheme() {
     NUM=$1
 
-    SCHEMES=($(ls -1 "$HOME/.config/kitty/base16-kitty/colors"))
+    SCHEMES=($(ls -1 "$HOME/.config/kitty/themes/themes"))
 
     while true
     do
         SCHEME="${SCHEMES[$NUM % ${#SCHEMES[@]}]}"
-        kitty @ set-colors --all --configured "$HOME/.config/kitty/base16-kitty/colors/$SCHEME"
+        kitty @ set-colors --all --configured "$HOME/.config/kitty/themes/themes/$SCHEME"
         echo "Colorscheme set to $SCHEME. ($NUM)"
         NUM=$((NUM + 1))
         sleep 1
@@ -37,12 +39,14 @@ spinfo() {
     clear
 }
 
+# Clear displayed images.
 iclear() {
     SLEEP=${1:-0}
     sleep "$SLEEP"
     kitty +kitten icat --clear
 }
 
+# Display an image inline in the terminal.
 icat() {
     kitty +kitten icat --align left "$1"
 }
