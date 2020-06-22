@@ -2,8 +2,8 @@
 export ZSH=${HOME}/.oh-my-zsh
 
 ZSH_THEME="miloshadzic"
-ENABLE_CORRECTION="true"
-COMPLETION_WAITING_DOTS="true"
+# ENABLE_CORRECTION="true"
+# COMPLETION_WAITING_DOTS="true"
 
 plugins=(git zsh-syntax-highlighting gpg-agent)
 
@@ -19,5 +19,5 @@ source ${HOME}/.shellpaths
 source ${HOME}/.shellfn
 
 # # Initialize nvm and pyenv.
-# source /usr/share/nvm/init-nvm.sh
-# eval "$(pyenv init -)"
+source /usr/share/nvm/init-nvm.sh
+eval "$(pyenv init -)"
