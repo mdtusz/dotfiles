@@ -11,7 +11,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # echo $SHELL | grep "zsh" > /dev/null 2>&1
 if [[ $? == '' ]]; then
   action "Changing your shell to zsh."
-  sudo chsh -s $(which zsh);
+  sudo chsh -s "$(which zsh)";
   ok "New shell is zsh."
 else
   ok "Shell is already zsh."
@@ -37,53 +37,3 @@ else
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   ok "Vim Plug installed."
 fi
-
-
-# Homebrew
-which brew > /dev/null 2>&1
-if [[ $? != 0 ]]; then
-  action "Installing Homebrew."
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-  # Add casks
-  brew tap caskroom/versions
-  brew tap caskroom/fonts
-
-  ok "Homebrew successfully installed."
-else
-  ok "Homebrew already installed."
-fi
-
-
-# Update packages
-action "Updating homebrew and upgrading packages."
-brew update
-brew upgrade
-ok "Homebrew packages upgraded."
-
-
-# Install section
-action "Installing software from manifests."
-
-while read line; do
-  caski $line
-done < cask.txt
-
-while read line; do
-  brewi $line
-done < brew.txt
-
-while read line; do
-  npmi $line
-done < npm.txt
-
-while read line; do
-  pipi $line
-done < pip.txt
-
-ok "Software installation complete."
-
-
-
-
-

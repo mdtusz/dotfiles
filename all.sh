@@ -2,4 +2,3 @@
 
 ./dotfiles.sh
 ./install.sh
-./macos.sh
