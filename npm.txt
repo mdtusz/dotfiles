@@ -1,4 +1,0 @@
-node-sass
-nodemon
-eslint
-prettier
