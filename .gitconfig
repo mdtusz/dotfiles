@@ -1,6 +1,9 @@
 [user]
     name = Miklós Tusz
     email = mdtusz@gmail.com
+    signingkey = EE479420D3C96DA9 
+[commit]
+	gpgsign = true
 [github]
     user = mdtusz
 [push]
@@ -47,5 +50,3 @@
     process = git-lfs filter-process
     required = true
     clean = git-lfs clean -- %f
-[commit]
-	gpgsign = true
