@@ -27,7 +27,7 @@ colorscheme() {
 }
 
 spinfo() {
-    ALBUM_ART=$(playerctl metadata mpris:artUrl)
+    ALBUM_ART=$(playerctl metadata mpris:artUrl | sed 's/open.spotify.com/i.scdn.co/')
     ARTIST=$(playerctl metadata xesam:artist)
     ALBUM=$(playerctl metadata xesam:album)
     TITLE=$(playerctl metadata xesam:title)
