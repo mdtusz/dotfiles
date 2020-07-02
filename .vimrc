@@ -26,7 +26,6 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vimwiki/vimwiki'
-Plug 'wakatime/vim-wakatime'
 
 call plug#end()
 
@@ -177,9 +176,9 @@ let g:ale_sign_column_always = 1
 let g:ale_set_highlights = 0
 let g:ale_sign_priority = 100
 
-let g:ale_python_auto_pipenv= 1
+let g:ale_python_auto_pipenv = 1
 let g:ale_python_black_auto_pipenv = 1
-let g:ale_python_flake8_auto_pipenv= 1
+let g:ale_python_flake8_auto_pipenv = 1
 let g:ale_python_mypy_auto_pipenv = 1
 let g:ale_python_mypy_options = "--ignore-missing-imports"
 
@@ -227,5 +226,5 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/Code/snippets']
 let g:SuperTabDefaultCompletionType="<C-n>"
 
 " Workspaces
-let g:workspace_autosave = 0
+let g:workspace_autosave = 1
 
