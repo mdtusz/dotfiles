@@ -1,0 +1,30 @@
+* {
+    color: #ffffff;
+    background-color: transparent;
+    font: "Inter Light 14";
+}
+
+window {
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+prompt {
+    margin: 0 20px 0 0;
+    background-color: transparent;
+    width: 0;
+}
+
+inputbar {
+    padding: 20px;
+    background-color: #111111;
+}
+
+element {
+    padding: 0 20px 0 20px; 
+}
+
+element.selected {
+    background-color: transparent;
+    color: #4466DD;
+}
