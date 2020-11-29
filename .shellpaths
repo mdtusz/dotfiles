@@ -15,4 +15,6 @@ PATH=$HOME/.cargo/bin:$PATH
 # Go binaries.
 PATH=$GOPATH/bin:$PATH
 
+PATH=$HOME/.node_modules/bin:$PATH
+
 export PATH=$PATH

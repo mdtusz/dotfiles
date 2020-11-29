@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 # Shell functions
 
 # Display the weather. Optionally, provide a location argument.

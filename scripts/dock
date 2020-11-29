@@ -3,23 +3,14 @@ export DISPLAY=:0
 export XAUTHORITY=/home/miklos/.Xauthority
 
 
-HOME_MONITOR=$(xrandr | grep "HDMI-2 connected")
-WORK_MONITOR=$(xrandr | grep "DVI-I-1-1 connected")
+HOME_MONITOR=$(xrandr | grep "DP1 connected")
 
-if [[ $HOME_MONITOR && $WORK_MONITOR ]]; then
+if [[ $HOME_MONITOR ]]; then
     xrandr \
-        --output HDMI-2 --auto --above eDP-1 \
-        --output DVI-I-1-1 --auto --rotate right --right-of DVI-I-2-2 \
-        --output DVI-I-2-2 --auto --right-of HDMI-2 
-elif [[ $WORK_MONITOR ]]; then
-    xrandr \
-        --output DVI-I-1-1 --auto --left-of DVI-I-2-2 \
-        --output DVI-I-2-2 --auto --above eDP-1 
+        --output DP1 --auto --scale 2 --above eDP1 
 else
     xrandr \
-        --output HDMI-2 --off
-        --output DVI-I-1-1 --off
-        --output DVI-I-2-2 --off
+        --output DP1 --off
 fi
 
 i3-msg restart
