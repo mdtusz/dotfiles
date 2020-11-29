@@ -1,23 +1,27 @@
 # # Path to your oh-my-zsh installation.
-export ZSH=${HOME}/.oh-my-zsh
+export ZSH=/usr/share/oh-my-zsh
 
 ZSH_THEME="miloshadzic"
 # ENABLE_CORRECTION="true"
 # COMPLETION_WAITING_DOTS="true"
 
-plugins=(git zsh-syntax-highlighting gpg-agent)
+DOTFILES="$HOME/.dotfiles"
+
+plugins=(git git-extras gpg-agent)
 
 source $ZSH/oh-my-zsh.sh
 
-export LANG=en_US.UTF-8
-export EDITOR='vim'
-export SSH_KEY_PATH="~/.ssh/id_rsa"
-
 # # Load aliases, paths etc
-source ${HOME}/.shellaliases
-source ${HOME}/.shellpaths
-source ${HOME}/.shellfn
+source $DOTFILES/.shellvars
+source $DOTFILES/.shellaliases
+source $DOTFILES/.shellpaths
+source $DOTFILES/.shellfn
 
 # # Initialize nvm and pyenv.
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
 eval "$(pyenv init -)"
+
+autoload -U compinit
+compinit
+
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
