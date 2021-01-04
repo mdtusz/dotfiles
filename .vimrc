@@ -18,7 +18,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'sirtaj/vim-openscad'
 Plug 'sirver/ultisnips'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'thaerkh/vim-workspace'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -61,6 +60,7 @@ set expandtab
 set shiftround
 set foldmethod=syntax
 set foldlevelstart=8
+set nofoldenable
 set colorcolumn=80
 
 set wildmenu
@@ -75,7 +75,7 @@ set completeopt+=noinsert
 set completeopt+=noselect
 
 autocmd FileType haskell,javascript,typescript,typescriptreact,json,cpp,css,scss setlocal shiftwidth=2 softtabstop=2 tabstop=2
-autocmd BufWritePre *[js|ts|tsx|c|cpp|h|py|html|css|hs|md] %s/\s\+$//e
+autocmd BufWritePre *[js|ts|jsx|tsx|c|cpp|h|py|html|css|hs|md] %s/\s\+$//e
 
 " " Grayout sections of C/C++ code that have falsy ifdef macros.
 " augroup grayout
@@ -115,6 +115,7 @@ highlight GitGutterAdd ctermfg=green
 highlight GitGutterChange ctermfg=yellow
 highlight GitGutterDelete ctermfg=red
 highlight GitGutterChangeDelete ctermfg=blue
+highlight Folded ctermfg=yellow ctermbg=black
 
 highlight DiffAdd term=bold ctermbg=22 ctermfg=white
 highlight DiffDelete term=bold ctermbg=88 ctermfg=white
@@ -138,8 +139,11 @@ let g:ctrlp_custom_ignore = '\v[\/](__pycache__|venv|node_modules|dist|target)|(
 " Airline
 let g:airline_theme = 'base16_atelierlakeside'
 let g:airline_powerline_fonts = 1
+let g:airline_inactive_collapse = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#formatter = 'jsformatter'
+let g:airline#extensions#tagbar#enabled = 0
 
 " Vimwiki
 let g:vimwiki_list = [{
@@ -168,7 +172,7 @@ let g:gitgutter_max_signs = 1000
 let g:gitgutter_sign_priority = 1
 
 " Ale
-" let g:ale_hover_to_preview = 1
+let g:ale_hover_to_preview = 1
 let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
 let g:ale_close_preview_on_insert = 1
@@ -224,7 +228,4 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/Code/snippets']
 
 " Supertab
 let g:SuperTabDefaultCompletionType="<C-n>"
-
-" Workspaces
-let g:workspace_autosave = 1
 
