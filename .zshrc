@@ -19,7 +19,7 @@ source $DOTFILES/.shellfn
 
 # # Initialize nvm and pyenv.
 # source /usr/share/nvm/init-nvm.sh
-eval "$(pyenv init -)"
+# eval "$(pyenv init -)"
 
 autoload -U compinit
 compinit
