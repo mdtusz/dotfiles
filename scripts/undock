@@ -1,7 +1,13 @@
-#! /bin/sh
-xrandr --output DVI-I-1-1 --off
-xrandr --output DVI-I-2-2 --off
-xrandr --output HDMI-2 --off
+#! /bin/bash
+
+MONITORS=$(xrandr --listmonitors | tail -n +2 | cut -d' ' -f6)
+
+for monitor in $MONITORS; do
+    if [[ $monitor != "eDP1" ]]; then
+        xrandr --output "$monitor" --off
+    fi
+done
+
 i3-msg restart
 
 # pacmd unload-module module-udev-detect && pacmd load-module module-udev-detect
