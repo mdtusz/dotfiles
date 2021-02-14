@@ -1,5 +1,7 @@
 # Defaults file can be created with `:config-write-py -d`
 
+import socket
+
 config.load_autoconfig()
 
 c.auto_save.session = True
