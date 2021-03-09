@@ -12,3 +12,5 @@ alias blue='redshift -x'
 alias invert='xcalib -invert -alter'
 
 alias open='xdg-open'
+
+alias dc='docker-compose'
