@@ -21,7 +21,7 @@ c.colors.tabs.selected.even.bg = "#444444"
 c.colors.tabs.selected.odd.bg = "#555555"
 
 c.colors.webpage.darkmode.enabled = False
-c.colors.webpage.prefers_color_scheme_dark = True
+c.colors.webpage.preferred_color_scheme = "auto"
 
 c.completion.height = 256
 
