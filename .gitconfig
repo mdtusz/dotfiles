@@ -41,6 +41,7 @@
     hist = log --graph --decorate --oneline
     tree = log --all --graph --decorate --oneline
     merges = log --graph --decorate --oneline --merges
+    b = "!zsh -c 'source $HOME/.shellfn && branch-info'"
 [pager]
     branch = false
 [status]

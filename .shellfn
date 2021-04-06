@@ -51,6 +51,26 @@ icat() {
     kitty +kitten icat --align left "$1"
 }
 
+# Show git branch info with description.
+branch-info() {
+    active=" "
+
+    for branch in $(git branch); do
+        if [[ "$branch" == "*" ]]; then
+            active="*"
+            continue
+        fi
+
+        description=$(git config "branch.$branch.description")
+
+        printf '%s \e[33m%s\e[0m\t%s\n' "$active" "$branch" "$description"
+
+        if [[ "$active" == "*" ]]; then
+            active=" "
+        fi
+    done
+}
+
 cleanup() {
     BASE=$1
     BRANCHES=$(git for-each-ref refs/heads --format="%(refname:short)" | grep -vE "(develop|master|rc-v\d+\.\d+\.\d+)")
