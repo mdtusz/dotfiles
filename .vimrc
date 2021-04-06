@@ -7,12 +7,15 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dense-analysis/ale'
 Plug 'ervandew/supertab'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'fisadev/vim-isort'
 Plug 'honza/vim-snippets'
+Plug 'leafgarland/typescript-vim'
 Plug 'ledger/vim-ledger'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
 Plug 'raimondi/delimitmate'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'sirtaj/vim-openscad'
@@ -20,6 +23,7 @@ Plug 'sirver/ultisnips'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline'
@@ -191,8 +195,8 @@ let g:ale_scss_prettier_options = '--parser css'
 " let g:ale_rust_rls_executable = "rust-analyzer"
 
 let g:ale_linters = {
-    \ 'javascript': ['prettier', 'eslint'],
-    \ 'typescript': ['tsserver', 'prettier', 'eslint'],
+    \ 'javascript': ['prettier', 'eslint', 'tsserver'],
+    \ 'typescript': ['prettier', 'tsserver', 'eslint'],
     \ 'python': ['pyls', 'flake8', 'mypy'],
     \ 'cpp': ['ccls'],
     \ 'rust': ['rls'],
@@ -201,9 +205,9 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
-    \ 'javascript': ['prettier'],
-    \ 'typescript': ['prettier'],
-    \ 'typescriptreact': ['prettier'],
+    \ 'javascript': ['prettier', 'eslint'],
+    \ 'typescript': ['prettier', 'eslint'],
+    \ 'typescriptreact': ['eslint'],
     \ 'json': ['prettier'],
     \ 'python': ['black', 'isort'],
     \ 'rust': ['rustfmt'],
@@ -229,3 +233,14 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/Code/snippets']
 " Supertab
 let g:SuperTabDefaultCompletionType="<C-n>"
 
+" Hexokinase
+let g:Hexokinase_highlighters = ['foreground']
+
+" Vim-Go
+let g:go_def_mode = 'gopls'
+let g:go_highlight_operators = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
