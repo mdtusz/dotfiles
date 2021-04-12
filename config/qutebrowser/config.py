@@ -64,6 +64,6 @@ c.url.searchengines = {
     "cmd": "https://cmdwatch.atlassian.net/browse/CMD-{}",
 }
 
-config.bind("<Shift-Escape>", "leave-mode", mode="passthrough")
+config.bind("<Shift-Escape>", "mode-leave", mode="passthrough")
 config.bind("<Ctrl-Shift-}>", "tab-next")
 config.bind("<Ctrl-Shift-{>", "tab-prev")
