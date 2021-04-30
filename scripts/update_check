@@ -2,10 +2,9 @@
 
 UPDATES=$(yay -Qu)
 
-if [[ -z "${UPDATES//}" ]]; then
-    echo "No Updates"
-    racket /home/miklos/Code/boop/main.rkt -t "Updates" -s "No updates today!" -w 2000 &
+if [[ -z ${UPDATES} ]]; then
+    dunstify -a "System" -u low -t 5000 "No updates for now."
 else
     echo "Updates"
-    racket /home/miklos/Code/boop/main.rkt -t "Updates" -s "Updates found!" -w 2000 &
+    dunstify -a "System" -t 5000 "Updates found!"
 fi
