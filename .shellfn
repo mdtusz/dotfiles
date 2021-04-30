@@ -51,6 +51,19 @@ icat() {
     kitty +kitten icat --align left "$1"
 }
 
+screencap() {
+    DIMENSIONS=$(slop -q -f '-video_size %wx%h -i +%x,%y')
+
+    if [[ $? == 1 ]]; then
+        return
+    fi
+
+    echo "$DIMENSIONS"
+
+    ffmpeg -f x11grab -y -r 60 "$DIMENSIONS" -vcodec huffuv out.avi
+}
+
+
 # Show git branch info with description.
 branch-info() {
     active=" "
