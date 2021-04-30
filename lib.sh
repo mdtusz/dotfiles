@@ -8,29 +8,41 @@ COL_BLUE=$ESC_SEQ"34;01m"
 COL_YELLOW=$ESC_SEQ"33;01m"
 
 function ok() {
-  echo -e "${COL_GREEN}[ok]:${COL_RESET} $1"
+    echo -e "${COL_GREEN}[ok]:${COL_RESET} $1"
 }
 
 function running() {
-  echo -e "\n${COL_BLUE}[run]:${COL_RESET} $1"
+    echo -e "\n${COL_BLUE}[run]:${COL_RESET} $1"
 }
 
 function action() {
-  echo -e "${COL_YELLOW}[action]:${COL_RESET} $1"
+    echo -e "${COL_YELLOW}[action]:${COL_RESET} $1"
 }
 
 function error() {
-  echo -e "${COL_RED}[error]:${COL_RESET} $1"
+    echo -e "${COL_RED}[error]:${COL_RESET} $1"
 }
 
 function symifne() {
-  action "Linking $1."
+    SRC=$1
+    DEST=$1
 
-  if [[ -L $1 ]]; then
-    ok "Symlink exists."
-    return
-  fi
+    if [[ -z "$2" ]]; then
+        DEST=$2
+    fi
 
-  ln -s "$HOME/.dotfiles/$1" "$1"
-  ok "Linked $1.";
+    action "Creating symlink from $DEST to $SRC."
+    read -rp "Continue? [Y/n]: " yn
+
+    case $yn in
+        [Nn]* ) return;;
+    esac
+
+    if [[ -L "$DEST" ]]; then
+        ok "Symlink destination already exists."
+        return
+    fi
+
+    ln -s "$HOME/.dotfiles/$SRC" "$DEST"
+    ok "Linked $DEST.";
 }
