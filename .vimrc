@@ -207,7 +207,7 @@ let g:ale_linters = {
 let g:ale_fixers = {
     \ 'javascript': ['prettier', 'eslint'],
     \ 'typescript': ['prettier', 'eslint'],
-    \ 'typescriptreact': ['eslint'],
+    \ 'typescriptreact': ['prettier', 'eslint'],
     \ 'json': ['prettier'],
     \ 'python': ['black', 'isort'],
     \ 'rust': ['rustfmt'],
