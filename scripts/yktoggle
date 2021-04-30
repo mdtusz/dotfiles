@@ -1,0 +1,7 @@
+#! /bin/bash
+if ykman config usb -l | grep -q "OTP"; then
+    ykman config usb -f -d OTP
+else
+    ykman config usb -f -e OTP
+fi
+
