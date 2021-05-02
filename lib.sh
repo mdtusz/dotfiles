@@ -25,7 +25,7 @@ function error() {
 
 function symifne() {
     SRC=$1
-    DEST=$1
+    DEST=$2
 
     if [[ -z "$2" ]]; then
         DEST=$2

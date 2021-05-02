@@ -7,9 +7,13 @@ pushd $HOME > /dev/null 2>&1
 
 running "Creating symlinks for dotfiles."
 
-symifne .zshrc
-symifne .vimrc
-symifne .gitconfig
+symifne .zshrc "$HOME/.zshrc"
+symifne .vimrc "$HOME/.vimrc"
+symifne .gitconfig "$HOME/.gitconfig"
+
+# X configuration
+symifne .Xresources "$HOME/.Xresources"
+symifne .Xmodmap "$HOME/.Xmodmap"
 
 popd > /dev/null 2>&1
 
