@@ -57,11 +57,10 @@ c.tabs.new_position.related = "last"
 c.tabs.padding = {"top": 2, "bottom": 2, "left": 0, "right": 5}
 
 c.url.default_page = "https://google.com/"
-c.url.start_pages = ["https://cmdwatch.slack.com"]
+c.url.start_pages = ["https://aon3d.slack.com"]
 c.url.searchengines = {
     "DEFAULT": "http://google.com/search?q={}",
     "ddg": "https://duckduckgo.com/?q={}",
-    "cmd": "https://cmdwatch.atlassian.net/browse/CMD-{}",
 }
 
 config.bind("<Shift-Escape>", "mode-leave", mode="passthrough")
