@@ -7,9 +7,5 @@ export EDITOR=$(which vim)
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 export GOPATH="$HOME/Code/Go"
 
-# CMD Things
-export GITHUB_API_TOKEN=
-export CMD_WORKSPACE="$HOME/Code/Cmd"
-export MAILER_TEST_ADDRESS=
-
-export NPM_CONFIG_PREFIX="$HOME/.node_modules"
+# export NPM_CONFIG_PREFIX="$HOME/.node_modules"
+unset NPM_CONFIG_PREFIX
