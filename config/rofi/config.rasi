@@ -6,7 +6,7 @@
 
 window {
     padding: 40px;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 1.0);
 }
 
 prompt {
@@ -17,7 +17,7 @@ prompt {
 
 inputbar {
     padding: 20px;
-    background-color: #111111;
+    background-color: #222222;
 }
 
 element {
@@ -26,5 +26,5 @@ element {
 
 element.selected {
     background-color: transparent;
-    color: #4466DD;
+    color: #6699EE;
 }
