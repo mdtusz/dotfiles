@@ -7,10 +7,12 @@ HOME_MONITOR=$(xrandr | grep "DP1 connected")
 
 if [[ $HOME_MONITOR ]]; then
     xrandr \
-        --output DP1 --auto --scale 2 --above eDP1 
+        --output DP1 --auto --scale 1.5 \
+        --output eDP1 --off
 else
     xrandr \
-        --output DP1 --off
+        --output DP1 --off \
+        --output eDP1 --auto 
 fi
 
 i3-msg restart
