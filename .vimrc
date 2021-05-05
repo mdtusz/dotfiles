@@ -199,7 +199,7 @@ let g:ale_linters = {
     \ 'typescript': ['prettier', 'tsserver', 'eslint'],
     \ 'python': ['pyls', 'flake8', 'mypy'],
     \ 'cpp': ['ccls'],
-    \ 'rust': ['rls'],
+    \ 'rust': ['rls', 'analyzer'],
     \ 'html': [],
     \ 'shell': ['shellcheck'],
 \}
