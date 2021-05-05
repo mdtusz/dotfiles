@@ -41,7 +41,7 @@ HOSTNAME = socket.gethostname()
 if HOSTNAME == "kappa":
     c.qt.highdpi = False
     c.zoom.default = "150%"
-elif HOSTNAME == "iota":
+elif HOSTNAME == "iota" or HOSTNAME == "delta":
     c.qt.highdpi = True
     c.zoom.default = "100%"
 
