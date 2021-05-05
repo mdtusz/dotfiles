@@ -141,7 +141,6 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_custom_ignore = '\v[\/](__pycache__|venv|node_modules|dist|target)|(\.(swp|git|svn|pyc))$'
 
 " Airline
-let g:airline_theme = 'base16_atelierlakeside'
 let g:airline_powerline_fonts = 1
 let g:airline_inactive_collapse = 1
 let g:airline#extensions#tabline#enabled = 1
