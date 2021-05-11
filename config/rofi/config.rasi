@@ -1,3 +1,7 @@
+configuration {
+    window-thumbnail: true;
+}
+
 * {
     color: #ffffff;
     background-color: transparent;
