@@ -81,11 +81,6 @@ set completeopt+=noselect
 autocmd FileType haskell,javascript,typescript,typescriptreact,json,cpp,css,scss setlocal shiftwidth=2 softtabstop=2 tabstop=2
 autocmd BufWritePre *[js|ts|jsx|tsx|c|cpp|h|py|html|css|hs|md] %s/\s\+$//e
 
-" " Grayout sections of C/C++ code that have falsy ifdef macros.
-" augroup grayout
-"     autocmd BufEnter *\.[cpp|hpp|c|h] GrayoutUpdate
-" augroup END
-
 command Bd bp|bd #
 command Vsp vsp|bp
 command Wq wq
