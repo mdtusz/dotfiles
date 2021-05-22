@@ -14,3 +14,4 @@ alias invert='xcalib -invert -alter'
 alias open='xdg-open'
 
 alias dc='docker-compose'
+alias tf='terraform'
