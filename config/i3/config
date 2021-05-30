@@ -17,7 +17,7 @@ mouse_warping output
 # exec_always --no-startup-id /usr/bin/picom -b -i 1.0 -I 1 -O 1 -D 0
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id /usr/bin/dunst
-exec_always --no-startup-id feh --bg-scale ~/Downloads/bg.jpg
+exec_always --no-startup-id feh --bg-scale ~/downloads/bg.jpg
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -30,8 +30,8 @@ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
 bindsym XF86Display exec --no-startup-id xrandr --output eDP1 --auto && i3-msg restart
 
-bindsym Print exec --no-startup-id flameshot full -p $HOME/Images/screenshots
-bindsym Shift+Print exec --no-startup-id flameshot gui -p $HOME/Images/screenshots
+bindsym Print exec --no-startup-id flameshot full -p $HOME/images/screenshots
+bindsym Shift+Print exec --no-startup-id flameshot gui -p $HOME/images/screenshots
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
