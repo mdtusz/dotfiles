@@ -38,10 +38,11 @@ c.fonts.default_family = ["Inter-Light"]
 c.fonts.default_size = "10pt"
 
 HOSTNAME = socket.gethostname()
+HIGH_DPI_HOSTS = ["iota", "delta", "lambda"]
 if HOSTNAME == "kappa":
     c.qt.highdpi = False
     c.zoom.default = "150%"
-elif HOSTNAME == "iota" or HOSTNAME == "delta":
+elif HOSTNAME in HIGH_DPI_HOSTS:
     c.qt.highdpi = True
     c.zoom.default = "100%"
 
