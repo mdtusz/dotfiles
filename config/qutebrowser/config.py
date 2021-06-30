@@ -32,7 +32,9 @@ c.content.blocking.method = "both"
 c.content.blocking.hosts.lists = [
     "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
 ]
-c.content.blocking.whitelist = []
+c.content.blocking.whitelist = [
+    "https://*.logrocket.com/"
+]
 
 c.fonts.default_family = ["Inter-Light"]
 c.fonts.default_size = "10pt"
@@ -63,6 +65,8 @@ c.url.searchengines = {
     "DEFAULT": "http://google.com/search?q={}",
     "ddg": "https://duckduckgo.com/?q={}",
 }
+
+c.downloads.location.directory = "~/downloads"
 
 config.bind("<Shift-Escape>", "mode-leave", mode="passthrough")
 config.bind("<Ctrl-Shift-}>", "tab-next")
