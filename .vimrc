@@ -99,6 +99,11 @@ map <C-]> :ALEGoToDefinition<CR>
 inoremap <S-CR> <Esc>O
 imap ✠ <S-CR>
 
+" Override filetypes for certain files
+augroup filetypedetect
+  autocmd! BufNewFile,BufRead *.frag setfiletype glsl
+  autocmd! BufNewFile,BufRead *.vert setfiletype glsl
+augroup END
 
 " Custom colorscheme
 set background=dark
