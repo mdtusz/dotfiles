@@ -9,7 +9,6 @@ Plug 'dense-analysis/ale'
 Plug 'ervandew/supertab'
 Plug 'fisadev/vim-isort'
 Plug 'honza/vim-snippets'
-Plug 'leafgarland/typescript-vim'
 Plug 'ledger/vim-ledger'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
@@ -195,6 +194,7 @@ let g:ale_scss_prettier_options = '--parser css'
 let g:ale_linters = {
     \ 'javascript': ['prettier', 'eslint', 'tsserver'],
     \ 'typescript': ['prettier', 'tsserver', 'eslint'],
+    \ 'typescriptreact': ['prettier', 'tsserver', 'eslint'],
     \ 'python': ['pyls', 'flake8', 'mypy'],
     \ 'cpp': ['ccls'],
     \ 'rust': ['rls', 'analyzer'],
