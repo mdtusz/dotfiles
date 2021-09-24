@@ -37,7 +37,7 @@ font-0 = Inter Medium:pixelsize=20;1
 
 modules-left = i3 xwindow
 modules-center = date 
-modules-right = filesystem pulseaudio bluetooth wlan wlan-updown memory cpu battery temperature 
+modules-right = filesystem pulseaudio wlan wlan-updown memory cpu battery temperature
 
 wm-restack = i3
 
@@ -172,15 +172,6 @@ label-volume-foreground = ${root.foreground}
 
 label-muted =  0%
 label-muted-foreground = #666
-
-[module/bluetooth]
-type = custom/script
-interval = 1
-
-format = <label>
-exec = exec $HOME/.config/polybar/scripts/bluetooth.sh state
-click-left = exec $HOME/.config/polybar/scripts/bluetooth.sh toggle
-click-right = exec $HOME/.config/polybar/scripts/bluetooth.sh connect
 
 [module/battery]
 type = internal/battery
