@@ -9,7 +9,6 @@ running "Creating symlinks for dotfiles."
 
 symifne .zshrc "$HOME/.zshrc"
 symifne .vimrc "$HOME/.vimrc"
-symifne .gitconfig "$HOME/.gitconfig"
 
 # X configuration
 symifne .Xresources "$HOME/.Xresources"
@@ -24,6 +23,7 @@ running "Creating symlinks for config directories and files."
 
 symifne config/dunst "$HOME/.config/dunst"
 symifne config/flameshot "$HOME/.config/flameshot"
+symifne config/git "$HOME/.config/git"
 symifne config/i3 "$HOME/.config/i3"
 symifne config/kitty "$HOME/.config/kitty"
 symifne config/polybar "$HOME/.config/polybar"

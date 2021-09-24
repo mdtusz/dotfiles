@@ -1,7 +1,11 @@
 [user]
     name = Miklós Tusz
     email = mdtusz@gmail.com
-    signingkey = EE479420D3C96DA9 
+    signingkey = 9E6F3CC3F3927720
+
+[includeIf "gitdir:**/aon3d/**/.git"]
+    path = aon3d.config
+
 [commit]
 	gpgsign = true
 [github]
@@ -29,23 +33,23 @@
     changed = green
     untracked = cyan
 [advice]
-    statusHints = true
+    statusHints = false 
 [core]
     editor = vim
     excludesfile = ~/.gitignore
 [alias]
     co = checkout
-    d = diff --color-words
     psu = push --set-upstream
     reabse = rebase
     hist = log --graph --decorate --oneline
     tree = log --all --graph --decorate --oneline
     merges = log --graph --decorate --oneline --merges
-    b = "!zsh -c 'source $HOME/.shellfn && branch-info'"
+    b = "!zsh -c 'source $HOME/.dotfiles/.shellfn && branch-info'"
 [pager]
     branch = false
 [status]
     submoduleSummary = true
+    showStash = true
 [filter "lfs"]
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
