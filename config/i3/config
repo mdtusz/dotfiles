@@ -28,7 +28,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s 5+
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 5-
-bindsym XF86Display exec --no-startup-id xrandr --output eDP1 --auto && i3-msg restart
+bindsym XF86Display exec --no-startup-id autorandr
 
 bindsym Print exec --no-startup-id flameshot full -p $HOME/images/screenshots
 bindsym Shift+Print exec --no-startup-id flameshot gui -p $HOME/images/screenshots
