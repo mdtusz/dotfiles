@@ -4,7 +4,7 @@ set $mod Mod1
 
 font pango:DejaVu Sans Mono 10
 
-new_window none
+default_border none
 focus_follows_mouse yes
 mouse_warping output
 
