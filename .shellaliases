@@ -1,7 +1,6 @@
 # Shell aliases
 
 alias pms='python2.7 -m SimpleHTTPServer'
-alias git='hub'
 
 alias ..='cd ..'
 alias ...='cd .. && cd ..'
