@@ -30,10 +30,10 @@ bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
 
 ### Idle configuration
-exec swayidle -w timeout 300 'swaylock -f -e -c 000000' \
-    timeout 600 'swaymsg "output * dpms off"' \
+exec swayidle -w timeout 600 'lock' \
+    timeout 900 'swaymsg "output * dpms off"' \
         resume 'swaymsg "output * dpms on"' \
-    before-sleep 'swaylock -f -c 000000'
+    before-sleep 'lock'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
