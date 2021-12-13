@@ -71,3 +71,5 @@ c.downloads.location.directory = "~/downloads"
 config.bind("<Shift-Escape>", "mode-leave", mode="passthrough")
 config.bind("<Ctrl-Shift-}>", "tab-next")
 config.bind("<Ctrl-Shift-{>", "tab-prev")
+
+config.bind("<Ctrl-Shift-p>", "spawn --userscript qute-pass --password-only")
