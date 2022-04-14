@@ -1,6 +1,6 @@
 # Shell paths
 
-export GOPATH=$HOME/Code/go
+export GOPATH=$HOME/code/go
 export PYENV_ROOT=$HOME/.pyenv
 
 # Quick scripts and helpers.
