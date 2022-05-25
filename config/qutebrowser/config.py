@@ -9,16 +9,29 @@ c.backend = "webengine"
 
 c.colors.messages.error.bg = "#ee1010"
 
+
 c.colors.tabs.bar.bg = "black"
+c.colors.tabs.pinned.even.bg= "black"
+c.colors.tabs.pinned.even.fg = "white"
+c.colors.tabs.pinned.odd.bg = "black"
+c.colors.tabs.pinned.odd.fg = "white"
 c.colors.tabs.even.bg = "black"
+c.colors.tabs.even.fg = "white"
 c.colors.tabs.odd.bg = "black"
 c.colors.tabs.odd.fg = "white"
 
 c.colors.tabs.indicator.start = "#444444"
 c.colors.tabs.indicator.stop = "#00aaaa"
 
-c.colors.tabs.selected.even.bg = "#444444"
-c.colors.tabs.selected.odd.bg = "#555555"
+c.colors.tabs.selected.even.bg = "#cccccc"
+c.colors.tabs.selected.even.fg= "#000000"
+c.colors.tabs.selected.odd.bg = "#cccccc"
+c.colors.tabs.selected.odd.fg= "#000000"
+
+c.colors.tabs.pinned.selected.even.bg = "#cccccc"
+c.colors.tabs.pinned.selected.even.fg= "#000000"
+c.colors.tabs.pinned.selected.odd.bg = "#cccccc"
+c.colors.tabs.pinned.selected.odd.fg= "#000000"
 
 c.colors.webpage.darkmode.enabled = False
 c.colors.webpage.preferred_color_scheme = "auto"
@@ -42,10 +55,8 @@ c.fonts.default_size = "10pt"
 HOSTNAME = socket.gethostname()
 HIGH_DPI_HOSTS = ["iota", "delta", "lambda"]
 if HOSTNAME == "kappa":
-    c.qt.highdpi = False
     c.zoom.default = "150%"
 elif HOSTNAME in HIGH_DPI_HOSTS:
-    c.qt.highdpi = True
     c.zoom.default = "100%"
 
 c.statusbar.show = "always"

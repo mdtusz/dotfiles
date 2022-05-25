@@ -33,7 +33,7 @@
     changed = green
     untracked = cyan
 [advice]
-    statusHints = false 
+    statusHints = true
 [core]
     editor = vim
     excludesfile = ~/.gitignore
@@ -57,3 +57,5 @@
     clean = git-lfs clean -- %f
 [diff]
 	tool = vimdiff
+[init]
+	defaultBranch = master

@@ -13,6 +13,9 @@ set $menu wofi --show=drun | xargs swaymsg exec --
 set $laptop eDP-1 
 set $desktop DP-3
 
+### Configure environment for pipewire and xdg-desktop-portal
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
 ### Output configuration
 #
 output * bg $HOME/images/bg.jpg fill
@@ -51,8 +54,8 @@ input "6127:24648:ThinkPad_Compact_Bluetooth_Keyboard_with_TrackPoint" {
     repeat_delay 250
     repeat_rate 100
 
-    accel_profile "flat"
-    pointer_accel 1.0
+    accel_profile "adaptive"
+    pointer_accel 0.5
 }
 
 input "1578:16642:MOSART_Semi._2.4G_Wireless_Mouse" {
