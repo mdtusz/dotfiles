@@ -9,6 +9,7 @@ Plug 'dense-analysis/ale'
 Plug 'ervandew/supertab'
 Plug 'fisadev/vim-isort'
 Plug 'honza/vim-snippets'
+Plug 'kergoth/vim-bitbake'
 Plug 'ledger/vim-ledger'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
@@ -136,7 +137,7 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_switch_buffer = 'ET'
 let g:ctrlp_max_files = 0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_custom_ignore = '\v[\/](__pycache__|venv|node_modules|dist|target)|(\.(swp|git|svn|pyc))$'
+let g:ctrlp_custom_ignore = '\v[\/](__pycache__|venv|node_modules|dist|target|build)/|(\.(swp|git|svn|pyc))$'
 
 " Airline
 let g:airline_powerline_fonts = 1
@@ -148,19 +149,12 @@ let g:airline#extensions#tagbar#enabled = 0
 
 " Vimwiki
 let g:vimwiki_list = [{
-        \'path': '~/Documents/Wiki/vimwiki',
-        \'path_html': '~/Documents/Wiki/vimwiki_html',
-        \'template_path': '~/Documents/Wiki/templates',
+        \'path': '~/documents/wiki/vimwiki',
+        \'path_html': '~/documents/wiki/vimwiki_html',
+        \'template_path': '~/documents/wiki/templates',
         \'auto_export': 1,
         \'auto_tags': 1
-    \ }, {
-        \'path': '~/Documents/Wiki/aonwiki',
-        \'path_html': '~/Documents/Wiki/aonwiki_html',
-        \'template_path': '~/Documents/Wiki/templates',
-        \'auto_export': 1,
-        \'auto_tags': 1
-    \ }
-\]
+    \ }]
 
 " Gitgutter
 let g:gitgutter_realtime = 1
@@ -197,7 +191,7 @@ let g:ale_linters = {
     \ 'typescriptreact': ['prettier', 'tsserver', 'eslint'],
     \ 'python': ['pyls', 'flake8', 'mypy'],
     \ 'cpp': ['ccls'],
-    \ 'rust': ['rls', 'analyzer'],
+    \ 'rust': ['analyzer'],
     \ 'html': [],
     \ 'shell': ['shellcheck'],
 \}
@@ -242,3 +236,6 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_function_parameters = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
+
+" Vim Markdown
+let g:vim_markdown_follow_anchor = 1
