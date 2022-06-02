@@ -1,7 +1,7 @@
 [user]
     name = Miklós Tusz
     email = mdtusz@gmail.com
-    signingkey = 9E6F3CC3F3927720
+    signingkey = DB7834B40D79CA1E
 
 [includeIf "gitdir:**/aon3d/**"]
     path = aon3d.config
