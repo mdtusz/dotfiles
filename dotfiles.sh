@@ -10,12 +10,7 @@ running "Creating symlinks for dotfiles."
 symifne .zshrc "$HOME/.zshrc"
 symifne .vimrc "$HOME/.vimrc"
 
-# X configuration
-symifne .Xresources "$HOME/.Xresources"
-symifne .Xmodmap "$HOME/.Xmodmap"
-
 popd > /dev/null 2>&1
-
 
 # Configs
 pushd $HOME/.config > /dev/null 2>&1
