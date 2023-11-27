@@ -2,6 +2,7 @@
 # Shell Variables.
 # Some of these may not be checked in.
 
+export TERM=xterm-kitty
 export LANG="en_US.UTF-8"
 export EDITOR=$(which vim)
 export SSH_KEY_PATH="~/.ssh/id_rsa"
