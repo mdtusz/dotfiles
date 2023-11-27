@@ -14,3 +14,9 @@ alias open='xdg-open'
 
 alias dc='docker-compose'
 alias tf='terraform'
+
+alias ssh='TERM=xterm ssh'
+
+alias bn='ddcutil setvcp 10'
+
+alias ls='ls --color=tty --hyperlink=auto'
