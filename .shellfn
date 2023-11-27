@@ -35,8 +35,6 @@ spinfo() {
     echo "$TITLE"
     echo "$ALBUM"
     echo "$ARTIST"
-    iclear 3
-    clear
 }
 
 # Clear displayed images.
