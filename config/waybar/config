@@ -18,7 +18,6 @@
         "clock#time",
     ],
     "modules-right": [
-        "idle_inhibitor",
         "pulseaudio",
         "network",
         "disk",
@@ -57,7 +56,7 @@
 
     "clock#time": {
         "interval": 1,
-        "format": "{:%H:%M:%S}",
+        "format": "{:%H:%M:%OS}",
         "tooltip": false
     },
 
@@ -69,7 +68,7 @@
 
     "cpu": {
         "interval": 5,
-        "format": " {usage}% ({load})", 
+        "format": "  {usage}% ({load})", 
         "states": {
           "warning": 70,
           "critical": 90
@@ -87,9 +86,9 @@
 
     "network": {
         "interval": 5,
-        "format-wifi": " {essid} ({signalStrength}%)", 
-        "format-ethernet": " {ifname}: {ipaddr}/{cidr}", 
-        "format-disconnected": "⚠ Disconnected",
+        "format-wifi": "   {essid} ({signalStrength}%)", 
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr}", 
+        "format-disconnected": "  Disconnected",
         "tooltip-format": "{ifname}: {ipaddr}"
     },
 
@@ -119,7 +118,7 @@
         "scroll-step": 1,
         "format": "{icon}  {volume}%",
         "format-bluetooth": "{icon}  {volume}% ",
-        "format-muted": "🔇",
+        "format-muted": "",
         "format-icons": {
             "headphones": "",
             "handsfree": "",
@@ -127,7 +126,7 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["🔈", "🔊"]
+            "default": ["A", "B"]
         },
         "on-click": "kitty pulsemixer"
     },
@@ -143,7 +142,7 @@
           "", // Icon: temperature-three-quarters
           ""  // Icon: temperature-full
       ],
-      "tooltip": true
+      "tooltip": false 
     },
 
     "tray": {
@@ -154,12 +153,4 @@
     "disk": {
         "format": " {percentage_used}%"
     },
-
-    "idle_inhibitor": {
-        "format": "idle {icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    }
 }
