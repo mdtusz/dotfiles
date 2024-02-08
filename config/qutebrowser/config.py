@@ -11,7 +11,7 @@ c.colors.messages.error.bg = "#ee1010"
 
 
 c.colors.tabs.bar.bg = "black"
-c.colors.tabs.pinned.even.bg= "black"
+c.colors.tabs.pinned.even.bg = "black"
 c.colors.tabs.pinned.even.fg = "white"
 c.colors.tabs.pinned.odd.bg = "black"
 c.colors.tabs.pinned.odd.fg = "white"
@@ -24,14 +24,14 @@ c.colors.tabs.indicator.start = "#444444"
 c.colors.tabs.indicator.stop = "#00aaaa"
 
 c.colors.tabs.selected.even.bg = "#cccccc"
-c.colors.tabs.selected.even.fg= "#000000"
+c.colors.tabs.selected.even.fg = "#000000"
 c.colors.tabs.selected.odd.bg = "#cccccc"
-c.colors.tabs.selected.odd.fg= "#000000"
+c.colors.tabs.selected.odd.fg = "#000000"
 
 c.colors.tabs.pinned.selected.even.bg = "#cccccc"
-c.colors.tabs.pinned.selected.even.fg= "#000000"
+c.colors.tabs.pinned.selected.even.fg = "#000000"
 c.colors.tabs.pinned.selected.odd.bg = "#cccccc"
-c.colors.tabs.pinned.selected.odd.fg= "#000000"
+c.colors.tabs.pinned.selected.odd.fg = "#000000"
 
 c.colors.webpage.darkmode.enabled = False
 c.colors.webpage.preferred_color_scheme = "auto"
@@ -40,13 +40,15 @@ c.completion.height = 256
 
 c.confirm_quit = ["always"]
 
+c.content.headers.user_agent = "Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/118.1.5615.213 Safari/{webkit_version}"
+
 c.content.blocking.enabled = True
 c.content.blocking.method = "both"
 c.content.blocking.hosts.lists = [
     "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
 ]
 c.content.blocking.whitelist = [
-    "https://*.logrocket.com/"
+    "https://*.logrocket.com/" "*.sentry.io/", "https://email.uber.com/",
 ]
 
 c.fonts.default_family = ["Inter-Light"]
@@ -84,3 +86,4 @@ config.bind("<Ctrl-Shift-}>", "tab-next")
 config.bind("<Ctrl-Shift-{>", "tab-prev")
 
 config.bind("<Ctrl-Shift-p>", "spawn --userscript qute-pass --password-only")
+config.bind('<Ctrl-Shift-k>', 'config-cycle content.user_stylesheets "~/.config/qutebrowser/css/pesticide.min.css" ""')
