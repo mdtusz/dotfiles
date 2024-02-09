@@ -21,7 +21,7 @@ symifne config/flameshot "$HOME/.config/flameshot"
 symifne config/git "$HOME/.config/git"
 symifne config/kitty "$HOME/.config/kitty"
 symifne config/qutebrowser "$HOME/.config/qutebrowser"
-symifne config/rofi "$HOME/.config/rofi"
+symifne config/wofi "$HOME/.config/wofi"
 symifne config/sway "$HOME/.config/sway"
 symifne config/waybar "$HOME/.config/waybar"
 
