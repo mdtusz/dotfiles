@@ -1,13 +1,8 @@
 [user]
     name = Miklós Tusz
     email = mdtusz@gmail.com
-    signingkey = DB7834B40D79CA1E
-
-[includeIf "gitdir:**/aon3d/**"]
-    path = aon3d.config
-
 [commit]
-	gpgsign = true
+	gpgsign = false
 [github]
     user = mdtusz
 [push]
@@ -59,3 +54,8 @@
 	tool = vimdiff
 [init]
 	defaultBranch = master
+
+[includeIf "gitdir:**/aon3d/**"]
+    path = aon3d.config
+
+
