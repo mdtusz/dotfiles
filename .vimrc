@@ -8,9 +8,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dense-analysis/ale'
 Plug 'ervandew/supertab'
 Plug 'fisadev/vim-isort'
+Plug 'github/copilot.vim'
 Plug 'honza/vim-snippets'
-Plug 'kergoth/vim-bitbake'
-Plug 'ledger/vim-ledger'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
 Plug 'raimondi/delimitmate'
@@ -78,6 +77,7 @@ set completeopt+=noinsert
 set completeopt+=noselect
 
 autocmd FileType haskell,javascript,typescript,typescriptreact,json,cpp,css,scss setlocal shiftwidth=2 softtabstop=2 tabstop=2
+autocmd FileType python setlocal foldmethod=indent
 autocmd BufWritePre *[js|ts|jsx|tsx|c|cpp|h|py|html|css|hs|md] %s/\s\+$//e
 
 command Bd bp|bd #
@@ -93,7 +93,7 @@ map <Leader><Leader> <C-w><C-w>
 map <Leader>} <C-w>}
 map <Leader>z <C-w>z
 
-map <C-]> :ALEGoToDefinition<CR>
+map gd :ALEGoToDefinition<CR>
 
 " Adds shift-enter for newline above
 inoremap <S-CR> <Esc>O
@@ -106,11 +106,12 @@ augroup filetypedetect
 augroup END
 
 " Custom colorscheme
-set background=dark
+set background=light
+" set termguicolors
 highlight SignColumn cterm=none ctermbg=none
 highlight CursorLineNr term=none cterm=none ctermfg=blue
 highlight LineNr term=none cterm=none ctermfg=237
-highlight ColorColumn ctermbg=none ctermfg=240 cterm=none
+highlight ColorColumn ctermbg=none ctermfg=240 cterm=none guibg=bg
 highlight VertSplit cterm=none ctermfg=black
 highlight MatchParen ctermbg=blue ctermfg=black
 highlight SpellBad ctermbg=red ctermfg=white
@@ -125,6 +126,10 @@ highlight DiffDelete term=bold ctermbg=88 ctermfg=white
 highlight DiffChange term=bold ctermbg=3 ctermfg=black
 highlight DiffText term=bold  ctermbg=none ctermfg=black
 
+highlight ALEVirtualTextError ctermbg=none ctermfg=red
+highlight ALEVirtualTextWarning ctermbg=none ctermfg=yellow
+highlight ALEVirtualTextInfo ctermbg=none ctermfg=grey
+
 highlight Pmenu ctermbg=black ctermfg=gray
 highlight PmenuSel ctermbg=black ctermfg=blue
 
@@ -137,7 +142,7 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_switch_buffer = 'ET'
 let g:ctrlp_max_files = 0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_custom_ignore = '\v[\/](__pycache__|venv|node_modules|dist|target|build)/|(\.(swp|git|svn|pyc))$'
+let g:ctrlp_custom_ignore = '\v[\/](__pycache__|venv|node_modules|dist|target|build)/|(\.(swp|git|svn|pyc|mypy_cache))$'
 
 " Airline
 let g:airline_powerline_fonts = 1
@@ -168,12 +173,17 @@ let g:gitgutter_sign_priority = 1
 
 " Ale
 let g:ale_hover_to_preview = 1
+let g:ale_floating_preview = 1
+let g:ale_set_balloons = 1
 let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 1
 let g:ale_close_preview_on_insert = 1
 let g:ale_sign_column_always = 1
 let g:ale_set_highlights = 0
 let g:ale_sign_priority = 100
+let g:ale_virtualtext_cursor = 0
+let g:ale_virtualtext_prefix = "%severity%: "
 
 let g:ale_python_auto_pipenv = 1
 let g:ale_python_black_auto_pipenv = 1
@@ -182,8 +192,6 @@ let g:ale_python_mypy_auto_pipenv = 1
 let g:ale_python_mypy_options = "--ignore-missing-imports"
 
 let g:ale_scss_prettier_options = '--parser css'
-
-" let g:ale_rust_rls_executable = "rust-analyzer"
 
 let g:ale_linters = {
     \ 'javascript': ['prettier', 'eslint', 'tsserver'],
@@ -196,6 +204,8 @@ let g:ale_linters = {
     \ 'shell': ['shellcheck'],
 \}
 
+let g:ale_rust_cargo_use_clippy = 0
+
 let g:ale_fixers = {
     \ 'javascript': ['prettier', 'eslint'],
     \ 'typescript': ['prettier', 'eslint'],
@@ -206,36 +216,26 @@ let g:ale_fixers = {
     \ 'cpp': ['clang-format'],
     \ 'scss': ['prettier'],
     \ 'css': ['prettier'],
-    \ 'go': ['gofmt']
 \}
 
 " DelimitMate
 let g:delimitMate_expand_cr = 2
 
 " TagBar
-nmap <C-F8> :TagbarToggle<CR>
-nmap <F8> :TagbarOpenAutoClose<CR>
+nmap <F8> :TagbarToggle<CR>
 
 " Ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<Tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
-let g:UltiSnipsSnippetDirectories=[$HOME.'/Code/snippets']
+" let g:UltiSnipsExpandTrigger="<Tab>"
+" let g:UltiSnipsJumpForwardTrigger="<Tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+" let g:UltiSnipsSnippetDirectories=[$HOME.'/code/snippets']
 
 " Supertab
 let g:SuperTabDefaultCompletionType="<C-n>"
 
 " Hexokinase
 let g:Hexokinase_highlighters = ['foreground']
-
-" Vim-Go
-let g:go_def_mode = 'gopls'
-let g:go_highlight_operators = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_function_parameters = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
+let g:Hexokinase_optInPatterns = 'full_hex,triple_hex,rgb,rgba,hsl,hsla'
 
 " Vim Markdown
 let g:vim_markdown_follow_anchor = 1
