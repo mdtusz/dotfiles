@@ -9,6 +9,7 @@ window {
   background-color: #222222;
   color: #ffffff;
   border: none;
+  border-radius: 0px;
   padding: 10px;
 }
 
