@@ -40,6 +40,7 @@
     tree = log --all --graph --decorate --oneline
     merges = log --graph --decorate --oneline --merges
     b = "!zsh -c 'source $HOME/.dotfiles/.shellfn && branch-info'"
+    stash-show = "!f() { git stash show -u -p stash@{${1:-0}}; }; f"
 [pager]
     branch = false
 [status]
