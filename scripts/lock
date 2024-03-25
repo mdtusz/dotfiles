@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-SCREEN=/tmp/screen.png
-BLURRED=/tmp/lockscreen.png
+# SCREEN=/tmp/screen.png
+# BLURRED=/tmp/lockscreen.png
 
 # /usr/bin/flameshot full -r > $SCREEN
 # /usr/bin/ffmpeg -y -i $SCREEN -filter_complex "boxblur=20:1" $BLURRED > /dev/null 2>&1
@@ -14,4 +14,4 @@ swaylock -f -e \
     --indicator-radius 100 \
     --indicator-idle-visible
 
-rm $SCREEN $BLURRED
+# rm $SCREEN $BLURRED
