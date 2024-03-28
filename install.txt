@@ -1,0 +1,15 @@
+ack
+bluez
+bluez-utils
+brightnessctl
+grimshot
+kitty
+man-db
+qutebrowser
+rustup
+swayidle
+swaylock
+wl-clipboard
+wofi
+zathura
+zathura-pdf-mupdf

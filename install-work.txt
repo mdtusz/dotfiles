@@ -1,0 +1,7 @@
+azure-cli
+docker
+httpie
+jq
+k9s
+pgcli
+terraform
