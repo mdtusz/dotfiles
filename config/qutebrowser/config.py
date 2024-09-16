@@ -42,14 +42,17 @@ c.confirm_quit = ["always"]
 
 c.content.headers.user_agent = "Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/118.1.5615.213 Safari/{webkit_version}"
 
-c.content.blocking.enabled = True
+c.content.javascript.clipboard = "access"
+c.content.blocking.enabled = False
 c.content.blocking.method = "both"
 c.content.blocking.hosts.lists = [
     "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
 ]
 c.content.blocking.whitelist = [
-    "https://*.logrocket.com/" "*.sentry.io/", "https://email.uber.com/",
+    "https://*.logrocket.com/" "*.sentry.io/", "https://email.uber.com/", "https://*.grafana.net/"
 ]
+
+c.content.pdfjs = True
 
 c.fonts.default_family = ["Inter-Light"]
 c.fonts.default_size = "10pt"
