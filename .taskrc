@@ -39,7 +39,7 @@ data.location=/home/miklos/.task
 #include solarized-light-256.theme
 #include no-color.theme
 
-news.version=2.6.0
+news.version=3.3.0
 
 urgency.uda.priority.H.coefficient=6.0
 urgency.uda.priority.M.coefficient=3.0

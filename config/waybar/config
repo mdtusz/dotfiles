@@ -20,9 +20,9 @@
     "modules-right": [
         "pulseaudio",
         "network",
-        "disk",
-        "memory",
         "cpu",
+        "memory",
+        "disk",
         "temperature",
         "clock#date",
         "battery"
@@ -41,7 +41,7 @@
             "critical": 5
         },
         // Connected to AC
-        "format": "  {icon}  {capacity}%", // Icon: bolt
+        "format": " {icon}  {capacity}%", // Icon: bolt
         // Not connected to AC
         "format-discharging": "{icon}  {capacity}%",
         "format-icons": [
@@ -68,7 +68,7 @@
 
     "cpu": {
         "interval": 5,
-        "format": "  {usage}% ({load})", 
+        "format": "CPU  {usage}% ({load})", 
         "states": {
           "warning": 70,
           "critical": 90
@@ -77,19 +77,19 @@
 
     "memory": {
         "interval": 5,
-        "format": " {percentage}%", 
+        "format": "RAM {percentage}%", 
         "states": {
             "warning": 70,
-            "critical": 90
+            "critical": 85
         }
     },
 
     "network": {
         "interval": 5,
-        "format-wifi": "   {essid} ({signalStrength}%)", 
+        "format-wifi": "    {essid} ({signalStrength}%)", 
         "format-ethernet": "{ifname}: {ipaddr}/{cidr}", 
         "format-disconnected": "  Disconnected",
-        "tooltip-format": "{ifname}: {ipaddr}"
+        "tooltip-format": "{ifname} ({signalStrength}%): {ipaddr}"
     },
 
     "sway/mode": {
@@ -118,7 +118,7 @@
         "scroll-step": 1,
         "format": "{icon}  {volume}%",
         "format-bluetooth": "{icon}  {volume}% ",
-        "format-muted": "",
+        "format-muted": "{icon} ",
         "format-icons": {
             "headphones": "",
             "handsfree": "",
@@ -126,7 +126,7 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["A", "B"]
+            "default": ["", "󰴸"]
         },
         "on-click": "kitty pulsemixer"
     },
@@ -134,7 +134,7 @@
     "temperature": {
       "critical-threshold": 80,
       "interval": 5,
-      "format": "{icon}  {temperatureC}°C",
+      "format": "{icon} {temperatureC}°C",
       "format-icons": [
           "", // Icon: temperature-empty
           "", // Icon: temperature-quarter
@@ -151,6 +151,6 @@
     },
 
     "disk": {
-        "format": " {percentage_used}%"
+        "format": "STO {percentage_used}%"
     },
 }

@@ -3,5 +3,6 @@ docker
 httpie
 k9s
 kubectl
+magic-wormhole
 pgcli
 terraform
