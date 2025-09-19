@@ -1,0 +1,5 @@
+git
+google-chrome
+gitup-app
+docker
+docker-compose
