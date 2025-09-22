@@ -1,8 +1,11 @@
 # # Path to your oh-my-zsh installation.
 source $ZDOTDIR/minimal.zsh
 
-autoload -Uz compinit 
-compinit
+autoload -Uz compinit && compinit
+
+# Match small letters to capital letters for autocompletion.
+# Capital letters will only match capital letters.
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 unameOut="$(uname -s)"
 case "${unameOut}" in
@@ -20,10 +23,6 @@ elif [[ $PLATFORM == "mac" ]]; then
   source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
   
-# ZSH_THEME="miloshadzic"
-# ENABLE_CORRECTION="true"
-# COMPLETION_WAITING_DOTS="true"
-
 CODE_DIR="$HOME/Code"
 DOTFILES="$CODE_DIR/dotfiles"
 
@@ -34,7 +33,3 @@ source $ZDOTDIR/.shellvars
 source $ZDOTDIR/.shellaliases
 source $ZDOTDIR/.shellpaths
 source $ZDOTDIR/.shellfn
-
-# # Initialize nvm and pyenv.
-# source /usr/share/nvm/init-nvm.sh
-# eval "$(pyenv init -)"
