@@ -7,6 +7,7 @@ alias ....='cd .. && cd .. & cd ..'
 
 alias dc='docker-compose'
 alias tf='terraform'
+alias vim='hx'
 alias ssh='TERM=xterm ssh'
 
 # Platform specific aliases.
