@@ -1,0 +1,19 @@
+#! /bin/env bash
+# Shell aliases
+
+alias ..='cd ..'
+alias ...='cd .. && cd ..'
+alias ....='cd .. && cd .. & cd ..'
+
+alias dc='docker-compose'
+alias tf='terraform'
+alias ssh='TERM=xterm ssh'
+
+# Platform specific aliases.
+if [[ "$PLATFORM" == 'mac' ]]; then
+  alias ls='gls --color=tty --hyperlink=auto'
+elif [[ "$PLATFORM" == 'linux' ]]; then
+  alias ls='ls --color=tty --hyperlink=auto'
+  alias open='xdg-open'
+fi
+
