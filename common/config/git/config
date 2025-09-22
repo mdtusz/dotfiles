@@ -30,7 +30,7 @@
 [advice]
     statusHints = true
 [core]
-    editor = vim
+    editor = hx
     excludesfile = ~/.gitignore
 [alias]
     co = checkout
