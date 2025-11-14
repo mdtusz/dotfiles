@@ -1,5 +1,5 @@
 # # Path to your oh-my-zsh installation.
-source $ZDOTDIR/minimal.zsh
+source "$ZDOTDIR/minimal.zsh"
 
 autoload -Uz compinit && compinit
 
@@ -22,14 +22,26 @@ elif [[ $PLATFORM == "mac" ]]; then
   source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
-  
+
 CODE_DIR="$HOME/Code"
 DOTFILES="$CODE_DIR/dotfiles"
 
+# History Configuration
+###############################################################################
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=50000
+
+setopt EXTENDED_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt APPEND_HISTORY
+
 plugins=(git git-extras gpg-agent)
 
-# # Load aliases, paths etc
-source $ZDOTDIR/.shellvars
-source $ZDOTDIR/.shellaliases
-source $ZDOTDIR/.shellpaths
-source $ZDOTDIR/.shellfn
+# Load aliases, paths etc
+###############################################################################
+source "$ZDOTDIR/.shellvars"
+source "$ZDOTDIR/.shellaliases"
+source "$ZDOTDIR/.shellpaths"
+source "$ZDOTDIR/.shellfn"

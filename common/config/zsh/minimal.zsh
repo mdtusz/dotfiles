@@ -1,14 +1,15 @@
 # Global settings
 MNML_OK_COLOR="${MNML_OK_COLOR:-2}"
 MNML_ERR_COLOR="${MNML_ERR_COLOR:-1}"
+MNML_WAR_COLOR="${MNML_WAR_COLOR:-3}"
 
-MNML_USER_CHAR="${MNML_USER_CHAR:-λ}"
+MNML_USER_CHAR="${MNML_USER_CHAR:-μτ}"
 MNML_INSERT_CHAR="${MNML_INSERT_CHAR:-›}"
 MNML_NORMAL_CHAR="${MNML_NORMAL_CHAR:-·}"
 MNML_ELLIPSIS_CHAR="${MNML_ELLIPSIS_CHAR:-..}"
 MNML_BGJOB_MODE=${MNML_BGJOB_MODE:-4}
 
-[ "${+MNML_PROMPT}" -eq 0 ] && MNML_PROMPT=(mnml_ssh mnml_pyenv mnml_status mnml_keymap)
+[ "${+MNML_PROMPT}" -eq 0 ] && MNML_PROMPT=(mnml_ssh mnml_status mnml_keymap)
 [ "${+MNML_RPROMPT}" -eq 0 ] && MNML_RPROMPT=('mnml_cwd 2 0' mnml_git)
 [ "${+MNML_INFOLN}" -eq 0 ] && MNML_INFOLN=(mnml_err mnml_jobs mnml_uhp mnml_files)
 
@@ -77,9 +78,9 @@ function mnml_git {
 
     if [ -n "$bname" ]; then
         if [ -n "$(git status --porcelain 2> /dev/null)" ]; then
-            statc="%{\e[0;3${MNML_ERR_COLOR}m%}"
+            statc="%{\e[0;3${MNML_WAR_COLOR}m%} 󱐋 "
         fi
-        printf '%b' "$statc$bname%{\e[0m%}"
+        printf '%b' "$statc%{\e[0;3${MNML_ERR_COLOR}m%}$bname%{\e[0m%}"
     fi
 }
 
@@ -131,13 +132,6 @@ function mnml_uhp {
 function mnml_ssh {
     if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
         printf '%b' "$(hostname -s)"
-    fi
-}
-
-function mnml_pyenv {
-    if [ -n "$VIRTUAL_ENV" ]; then
-        _venv="$(basename $VIRTUAL_ENV)"
-        printf '%b' "${_venv%%.*}"
     fi
 }
 
@@ -252,9 +246,10 @@ function _mnml_zle-keymap-select {
 # draw infoline if no command is given
 function _mnml_buffer-empty {
     if [ -z "$BUFFER" ]; then
-        _mnml_iline "$(_mnml_wrap MNML_INFOLN)"
-        _mnml_me
-        zle redisplay
+        # _mnml_iline "$(_mnml_wrap MNML_INFOLN)"
+        # _mnml_me
+        # zle redisplay
+        zle accept-line
     else
         zle accept-line
     fi
