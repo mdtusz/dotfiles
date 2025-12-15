@@ -17,4 +17,3 @@ elif [[ "$PLATFORM" == 'linux' ]]; then
   alias ls='ls --color=tty --hyperlink=auto'
   alias open='xdg-open'
 fi
-
