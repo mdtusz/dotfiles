@@ -64,6 +64,7 @@ source "$ZDOTDIR/.shellfn"
 # Nvm stuff
 ###############################################################################
 function load-nvmrc() {
+  (( $+functions[nvm_find_nvmrc] )) || return
   local nvmrc_path
   nvmrc_path="$(nvm_find_nvmrc)"
 
