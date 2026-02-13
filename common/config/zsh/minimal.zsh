@@ -72,7 +72,14 @@ function mnml_cwd {
     printf '%b' "$_g${(j:/:)cwd//\//$_w/$_g}$_w"
 }
 
+typeset -g _MNML_GIT_INFO=""
+typeset -g _MNML_GIT_FD=""
+
 function mnml_git {
+    printf '%b' "$_MNML_GIT_INFO"
+}
+
+function _mnml_git_async_worker {
     local statc="%{\e[0;3${MNML_OK_COLOR}m%}" # assume clean
     local bname="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
 
@@ -80,8 +87,34 @@ function mnml_git {
         if [ -n "$(git status --porcelain 2> /dev/null)" ]; then
             statc="%{\e[0;3${MNML_WAR_COLOR}m%} 󱐋 "
         fi
-        printf '%b' "$statc%{\e[0;3${MNML_ERR_COLOR}m%}$bname%{\e[0m%}"
+        printf '%s' "$statc%{\e[0;3${MNML_ERR_COLOR}m%}$bname%{\e[0m%}"
     fi
+}
+
+function _mnml_git_async_done {
+    local fd=$1
+    zle -F $fd
+    local result=""
+    read -r result <&$fd
+    exec {fd}<&-
+    _MNML_GIT_FD=""
+    if [[ "$result" != "$_MNML_GIT_INFO" ]]; then
+        _MNML_GIT_INFO="$result"
+        zle && zle reset-prompt
+    fi
+}
+
+function _mnml_git_precmd {
+    if [[ -n "$_MNML_GIT_FD" ]]; then
+        zle -F $_MNML_GIT_FD 2>/dev/null
+        exec {_MNML_GIT_FD}<&- 2>/dev/null
+        _MNML_GIT_FD=""
+    fi
+
+    _MNML_GIT_INFO=""
+
+    exec {_MNML_GIT_FD} < <(_mnml_git_async_worker)
+    zle -F $_MNML_GIT_FD _mnml_git_async_done
 }
 
 function mnml_hg {
@@ -290,6 +323,9 @@ PROMPT='$(_mnml_wrap MNML_PROMPT) '
 RPROMPT='$(_mnml_wrap MNML_RPROMPT)'
 
 _mnml_bind_widgets
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _mnml_git_precmd
 
 bindkey -M main  "^M" buffer-empty
 bindkey -M vicmd "^M" buffer-empty

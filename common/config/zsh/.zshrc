@@ -3,6 +3,8 @@ autoload -Uz add-zsh-hook compinit && compinit
 # Match small letters to capital letters for autocompletion.
 # Capital letters will only match capital letters.
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' menu select
+
 
 unameOut="$(uname -s)"
 case "${unameOut}" in
@@ -22,8 +24,15 @@ elif [[ $PLATFORM == "mac" ]]; then
   export PATH="/opt/homebrew/bin:$PATH"
 
   export NVM_DIR="$HOME/.config/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
+  # Lazy-load nvm: defer sourcing nvm.sh until node/npm/npx/nvm is first used
+  function _nvm_lazy_load {
+    unfunction node npm npx nvm _nvm_lazy_load
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+    load-nvmrc
+  }
+  function node npm npx nvm { _nvm_lazy_load; "$0" "$@" }
 fi
 
 CODE_DIR="$HOME/Code"
@@ -74,4 +83,3 @@ function load-nvmrc() {
 }
 
 add-zsh-hook chpwd load-nvmrc
-load-nvmrc
