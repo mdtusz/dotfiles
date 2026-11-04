@@ -31,6 +31,7 @@
     statusHints = true
 [core]
     editor = hx
+	pager = delta
     excludesfile = ~/.gitignore
 [alias]
     co = checkout
@@ -52,15 +53,19 @@
     process = git-lfs filter-process
     required = true
     clean = git-lfs clean -- %f
-[diff]
-	tool = vimdiff
 [init]
 	defaultBranch = master
-
-[includeIf "gitdir:**/aon3d/**"]
-    path = aon3d.config
-
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	dark = true
+[rebase]
+    updateRefs = true
 [credential "https://github.com"]
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = !/usr/bin/gh auth git-credential
+
+[includeIf "gitdir:**/aon3d/**"]
+    path = aon3d.config
