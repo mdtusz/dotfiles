@@ -39,7 +39,7 @@
     hist = log --graph --decorate --oneline
     tree = log --all --graph --decorate --oneline
     merges = log --graph --decorate --oneline --merges
-    b = "!zsh -c 'source $HOME/.dotfiles/.shellfn && branch-info'"
+    b = "!zsh -c 'source $HOME/.config/zsh/functions.zsh && branch-info'"
     sshow = "!f() { git stash show -u -p stash@{${1:-0}}; }; f"
     sync = "!zsh -c 'git checkout master && git pull -p'"
 [pager]

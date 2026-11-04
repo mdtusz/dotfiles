@@ -1,0 +1,11 @@
+# Shell options and history.
+
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=50000
+
+setopt EXTENDED_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
