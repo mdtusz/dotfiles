@@ -318,8 +318,33 @@ cmd_setup() {
         warn "zsh isn't installed; run \`packages\` first."
     fi
 
+    ensure_rustup
 }
 
+# Rust comes from the official installer on every system, not a package
+# manager, so `rustup self update` and toolchains work the same everywhere.
+ensure_rustup() {
+    if has rustup || [[ -x "$HOME/.cargo/bin/rustup" ]]; then
+        ok "rustup is installed."
+        return
+    fi
+
+    if ! confirm "rustup isn't installed. Install it with the official installer (sh.rustup.rs)?"; then
+        warn "Skipped rustup."
+        return
+    fi
+
+    has curl || die "curl is needed to install rustup; run \`packages\` first."
+    action "Installing rustup"
+    # PATH is already handled: `.zshenv` sources ~/.cargo/env.
+    if [[ $DRY_RUN == 1 ]]; then
+        run sh -c "curl https://sh.rustup.rs | sh -s -- -y --no-modify-path"
+        return
+    fi
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
+        | sh -s -- -y --no-modify-path
+    ok "rustup installed."
+}
 
 # Update
 ###############################################################################

@@ -19,7 +19,6 @@ magic-wormhole
 mkcert
 pgcli
 pinentry-mac
-rustup
 spotify
 tailscale-app
 task

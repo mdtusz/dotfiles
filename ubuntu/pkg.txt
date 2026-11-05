@@ -1,7 +1,8 @@
 # apt package names. Not in the Ubuntu archive, install separately:
-# helix (PPA or release binary). rustup (24.04+ has it in apt).
+# helix (PPA or release binary). rustup is installed by `dotfiles.sh setup`.
 ack
 cloc
+curl
 entr
 gh
 git

@@ -17,7 +17,6 @@ man-db
 oh-my-zsh
 pass
 qutebrowser
-rustup
 swayidle
 swaylock
 tailscale

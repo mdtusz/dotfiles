@@ -30,6 +30,20 @@ run() {
 
 has() { command -v "$1" > /dev/null 2>&1; }
 
+# Ask a yes/no question, defaulting to no. Without a terminal to ask on, the
+# answer is no. In a dry run, nothing is asked and the answer is yes, so the
+# dry run shows what would happen.
+confirm() {
+    if [[ "${DRY_RUN:-0}" == 1 ]]; then
+        printf '%s[dry-run]%s would ask: %s\n' "$COL_DIM" "$COL_RESET" "$1"
+        return 0
+    fi
+    [[ -t 0 ]] || return 1
+
+    local reply
+    read -rp "${COL_YELLOW}[?]${COL_RESET} $1 [y/N] " reply
+    [[ "$reply" == [Yy]* ]]
+}
 
 # Pretty-print a path with $HOME shortened to ~.
 tildify() { printf '%s' "${1/#$HOME/~}"; }
