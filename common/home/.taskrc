@@ -15,7 +15,7 @@
 # Use the command 'task show' to see all defaults and overrides
 
 # Files
-data.location=/home/miklos/.task
+data.location=~/.task
 
 # To use the default location of the XDG directories,
 # move this configuration file from ~/.taskrc to ~/.config/task/taskrc and uncomment below
@@ -39,7 +39,7 @@ data.location=/home/miklos/.task
 #include solarized-light-256.theme
 #include no-color.theme
 
-news.version=3.3.0
+news.version=3.4.1
 
 urgency.uda.priority.H.coefficient=6.0
 urgency.uda.priority.M.coefficient=3.0
