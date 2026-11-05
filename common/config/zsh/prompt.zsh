@@ -1,8 +1,8 @@
 # Prompt, based on the "minimal" theme (https://github.com/subnixr/minimal),
 # trimmed to the parts in use.
 #
-#   Left:  [ssh hostname] user char (red after an error, bold with background
-#          jobs), then the vi keymap char
+#   Left:  [ssh hostname, on a dark orange badge] user char (red after an error,
+#          bold with background jobs), then the vi keymap char
 #   Right: last two directories, git branch (⚡ when the tree is dirty)
 
 autoload -Uz add-zsh-hook
@@ -10,6 +10,8 @@ autoload -Uz add-zsh-hook
 mtzc_ok_color=2
 mtzc_err_color=1
 mtzc_war_color=3
+mtzc_ssh_bg_color=94  # 256-color dark orange (#875f00)
+mtzc_ssh_fg_color=15  # theme foreground; color 0 is grey in kitty theme
 
 mtzc_user_char="μτ"
 mtzc_insert_char="›"
@@ -28,7 +30,7 @@ mtzc_rprompt=('mtzc_cwd 2 0' mtzc_git)
 
 function mtzc_ssh {
     if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-        printf '%b' "$(hostname -s)"
+        printf '%b' "%{\e[48;5;${mtzc_ssh_bg_color};38;5;${mtzc_ssh_fg_color}m%} $(hostname -s) %{\e[0m%}"
     fi
 }
 
