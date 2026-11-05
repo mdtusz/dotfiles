@@ -32,7 +32,6 @@
 [core]
     editor = hx
 	pager = delta
-    excludesfile = ~/.gitignore
 [alias]
     co = checkout
     psu = push --set-upstream
@@ -63,9 +62,9 @@
 [rebase]
     updateRefs = true
 [credential "https://github.com"]
-	helper = !/usr/bin/gh auth git-credential
+	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = !/usr/bin/gh auth git-credential
+	helper = !gh auth git-credential
 
 [includeIf "gitdir:**/aon3d/**"]
     path = aon3d.config
