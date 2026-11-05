@@ -4,7 +4,9 @@ azure-cli
 bash-language-server
 coreutils
 docker-desktop
+gh
 git
+git-delta
 gitup-app
 gnupg
 google-chrome

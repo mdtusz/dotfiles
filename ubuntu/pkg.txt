@@ -1,0 +1,20 @@
+# apt package names. Not in the Ubuntu archive, install separately:
+# helix (PPA or release binary). rustup (24.04+ has it in apt).
+ack
+cloc
+entr
+gh
+git
+git-delta
+httpie
+jq
+kitty
+man-db
+pass
+taskwarrior
+tig
+vim
+wl-clipboard
+zsh
+zsh-autosuggestions
+zsh-syntax-highlighting

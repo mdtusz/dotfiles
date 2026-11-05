@@ -6,6 +6,8 @@ brightnessctl
 cloc
 entr
 git
+git-delta
+github-cli
 google-chrome
 grimshot
 helix
@@ -27,3 +29,6 @@ wl-clipboard
 wofi
 zathura
 zathura-pdf-mupdf
+zsh
+zsh-autosuggestions
+zsh-syntax-highlighting

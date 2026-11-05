@@ -1,4 +1,4 @@
-config/qutebrowser/qsettings/
+**/qutebrowser/qsettings/
 
 *.zsh_history
 *.zcompdump
