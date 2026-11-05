@@ -11,8 +11,8 @@ if [[ $OSTYPE == darwin* ]]; then
   path_prepend /opt/homebrew/bin
 fi
 
-# Quick scripts and helpers.
-path_prepend "$DOTFILES/scripts"
+# Scripts from the repo's `<layer>/bin` folders, linked by `dotfiles.sh link`.
+path_prepend "$HOME/.local/bin"
 
 path_prepend "$HOME/.node_modules/bin"
 

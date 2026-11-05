@@ -13,6 +13,7 @@
 #
 #   config/<name>    linked to ~/.config/<name>
 #   home/<name>      linked to ~/<name>
+#   bin/<name>       linked to ~/.local/bin/<name> (on PATH via path.zsh)
 #   pkg.txt          packages (brew / pacman+AUR via yay / apt)
 #   pkg-work.txt     extra packages, installed with --work
 #   setup.sh         one-off system tweaks, run by `setup`
@@ -26,6 +27,7 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$DOTFILES_DIR/lib.sh"
 
 CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+BIN_HOME="$HOME/.local/bin"
 DRY_RUN=0
 WORK=0
 
@@ -102,7 +104,7 @@ layer_entries() {
     # Include dotfiles in globs, and expand empty globs to nothing.
     shopt -s dotglob nullglob
     for layer in $LAYERS; do
-        printf '%s\n' "$DOTFILES_DIR/$layer/"{config,home}/*
+        printf '%s\n' "$DOTFILES_DIR/$layer/"{config,home,bin}/*
     done
     shopt -u dotglob nullglob
 }
@@ -114,6 +116,7 @@ dest_for() {
     case "$(basename "$(dirname "$1")")" in
         config) echo "$CONFIG_HOME/$name" ;;
         home) echo "$HOME/$name" ;;
+        bin) echo "$BIN_HOME/$name" ;;
     esac
 }
 
@@ -130,7 +133,7 @@ cmd_link() {
 # longer exists, e.g. after a config is renamed or moved to another layer.
 dangling_links() {
     local dir l target
-    for dir in "$HOME" "$CONFIG_HOME"; do
+    for dir in "$HOME" "$CONFIG_HOME" "$BIN_HOME"; do
         for l in "$dir"/.* "$dir"/*; do
             [[ -L "$l" && ! -e "$l" ]] || continue
             target="$(readlink "$l")"
